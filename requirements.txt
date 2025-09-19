@@ -1,0 +1,23 @@
+# 基础依赖
+requests
+beautifulsoup4
+selenium
+
+# GUI依赖
+PyQt5
+PyQtWebEngine
+
+# 大模型相关依赖
+openai
+transformers
+open_clip_torch
+pillow
+
+# 数据处理
+pandas
+numpy
+
+# 服务端
+flask
+flask-cors
+uvicorn
