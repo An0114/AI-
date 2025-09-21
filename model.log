@@ -317,3 +317,11 @@ Check your internet connection or see how to run the library in offline mode at 
 2025-09-20 21:29:06 - ai_model - INFO - 使用模拟模型进行classification任务分析
 2025-09-20 21:29:06 - ai_model - INFO - 使用模拟模型进行similarity任务分析
 2025-09-20 21:29:06 - ai_model - INFO - 使用模拟模型进行captioning任务分析
+2025-09-21 16:44:46 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-21 16:44:46 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-21 16:47:39 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-21 16:47:39 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-21 16:47:46 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-21 16:47:46 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-21 16:51:12 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-21 16:51:12 - ai_model - INFO - 尝试使用transformers库加载CLIP模型

@@ -2,3 +2,8 @@
 2025-09-20 11:12:20 - web_crawler - INFO - 爬取: https://www.iana.org/domains/example (深度: 1/1)
 2025-09-20 11:12:22 - web_crawler - INFO - 爬取完成: 2 页面，成功: 2，失败: 0
 2025-09-20 11:12:22 - web_crawler - INFO - 耗时: 4.99 秒
+2025-09-21 16:44:44 - web_crawler - INFO - 爬取: https://example.com (深度: 0/1)
+2025-09-21 16:47:38 - web_crawler - INFO - 爬取: https://example.com (深度: 0/1)
+2025-09-21 16:47:40 - web_crawler - INFO - 爬取: https://www.iana.org/domains/example (深度: 1/1)
+2025-09-21 16:47:43 - web_crawler - INFO - 爬取完成: 2 页面，成功: 2，失败: 0
+2025-09-21 16:47:43 - web_crawler - INFO - 耗时: 4.69 秒

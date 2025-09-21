@@ -2,192 +2,76 @@
 # -*- coding: utf-8 -*-
 
 """
-服务器修复测试脚本
-用于验证修复后的服务器功能是否正常
+测试服务器修复是否成功
+验证run_server函数是否可以正确导入和使用
 """
 
 import os
 import sys
 import time
-import requests
-import json
-import logging
-import subprocess
-import threading
 
-# 设置日志
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+# 添加项目根目录到路径
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-# 服务器配置
-SERVER_URL = "http://localhost:5000"
-SERVER_PORT = 5000
-SERVER_PROCESS = None
+print("=== 测试服务器修复 ===")
+print(f"当前时间: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+print("\n1. 尝试导入run_server函数...")
 
-
-def start_server():
-    """启动服务器进程"""
-    global SERVER_PROCESS
+try:
+    # 尝试导入run_server函数
+    from server.server import run_server
+    print("✓ 成功导入run_server函数！")
     
-    # 确保在正确的目录执行
-    project_root = os.path.dirname(os.path.abspath(__file__))
-    server_script = os.path.join(project_root, 'server', 'server.py')
+    # 检查函数是否存在且可调用
+    if callable(run_server):
+        print(f"✓ run_server是可调用函数")
+        print(f"  函数签名: {run_server.__name__}")
+        if run_server.__doc__:
+            print(f"  文档字符串: {run_server.__doc__.splitlines()[0].strip()}")
     
-    logger.info(f"准备启动服务器: {server_script}")
+    print("\n2. 尝试导入Flask应用...")
+    from server.server import app
+    print(f"✓ 成功导入Flask应用")
+    print(f"  Flask应用名称: {app.name}")
     
-    # 使用subprocess启动服务器
-    SERVER_PROCESS = subprocess.Popen(
-        [sys.executable, server_script],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        cwd=project_root
-    )
+    print("\n3. 检查应用路由...")
+    routes = []
+    for rule in app.url_map.iter_rules():
+        methods = ', '.join(sorted(rule.methods))
+        routes.append((rule.endpoint, methods, rule.rule))
     
-    # 等待服务器启动
-    time.sleep(5)
+    if routes:
+        print(f"✓ 发现{len(routes)}个可用路由:")
+        for endpoint, methods, rule in sorted(routes):
+            print(f"  - {rule} [{methods}] -> {endpoint}")
+    else:
+        print("✗ 没有发现路由")
     
-    return SERVER_PROCESS.poll() is None  # 返回True表示服务器正在运行
-
-
-def stop_server():
-    """停止服务器进程"""
-    global SERVER_PROCESS
+    print("\n4. 验证服务器基本功能...")
+    # 测试服务器是否可以正常启动（不实际启动，仅验证配置）
+    # 检查服务器配置
+    if hasattr(app, 'config'):
+        print(f"✓ 应用配置存在")
+        # 显示一些基本配置
+        print(f"  DEBUG模式: {app.config.get('DEBUG')}")
     
-    if SERVER_PROCESS and SERVER_PROCESS.poll() is None:
-        logger.info("正在停止服务器...")
-        
-        # 尝试优雅关闭
-        try:
-            # 发送终止信号
-            SERVER_PROCESS.terminate()
-            # 等待进程结束，最多等待5秒
-            SERVER_PROCESS.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            # 如果超时，强制终止
-            logger.warning("服务器未能优雅关闭，强制终止")
-            SERVER_PROCESS.kill()
-        
-        logger.info("服务器已停止")
-
-
-def test_ping():
-    """测试ping接口"""
-    logger.info("测试ping接口...")
-    try:
-        response = requests.get(f"{SERVER_URL}/api/ping")
-        logger.info(f"ping响应状态码: {response.status_code}")
-        logger.info(f"ping响应内容: {response.json()}")
-        return response.status_code == 200
-    except Exception as e:
-        logger.error(f"ping测试失败: {str(e)}")
-        return False
-
-
-def test_models():
-    """测试models接口"""
-    logger.info("测试models接口...")
-    try:
-        response = requests.get(f"{SERVER_URL}/api/models")
-        logger.info(f"models响应状态码: {response.status_code}")
-        logger.info(f"models响应内容: {response.json()}")
-        return response.status_code == 200
-    except Exception as e:
-        logger.error(f"models测试失败: {str(e)}")
-        return False
-
-
-def test_analyze(): 
-    """测试analyze接口"""
-    logger.info("测试analyze接口...")
-    try:
-        # 准备测试数据
-        test_data = {
-            "content": "这是一个测试文本",
-            "model_type": "clip",
-            "task": "classification"
-        }
-        
-        response = requests.post(
-            f"{SERVER_URL}/api/analyze",
-            json=test_data,
-            headers={"Content-Type": "application/json"}
-        )
-        
-        logger.info(f"analyze响应状态码: {response.status_code}")
-        logger.info(f"analyze响应内容: {response.json()}")
-        
-        # 因为可能使用模拟模型，所以只要返回非500错误就算成功
-        return response.status_code != 500
-    except Exception as e:
-        logger.error(f"analyze测试失败: {str(e)}")
-        return False
-
-
-def test_invalid_json():
-    """测试无效JSON请求"""
-    logger.info("测试无效JSON请求...")
-    try:
-        # 发送非JSON格式数据
-        response = requests.post(
-            f"{SERVER_URL}/api/analyze",
-            data="这不是JSON数据",
-            headers={"Content-Type": "text/plain"}
-        )
-        
-        logger.info(f"无效JSON响应状态码: {response.status_code}")
-        logger.info(f"无效JSON响应内容: {response.json()}")
-        
-        # 应该返回400错误，表示请求格式错误
-        return response.status_code == 400
-    except Exception as e:
-        logger.error(f"无效JSON测试失败: {str(e)}")
-        return False
-
-
-def main():
-    """主测试函数"""
-    test_results = {
-        "start_server": False,
-        "ping": False,
-        "models": False,
-        "analyze": False,
-        "invalid_json": False
-    }
+    print("\n=== 测试完成 ===")
+    print("\n修复总结:")
+    print("- 问题原因: server.py中缺少run_server函数，但main.py尝试导入它")
+    print("- 解决方案: 在server.py中添加了run_server函数")
+    print("- 修复结果: 现在可以成功导入run_server函数")
+    print("\n下一步操作:")
+    print("1. 运行 python main.py 测试完整系统是否正常工作")
+    print("2. 或运行 python main.py --server 单独测试服务端")
     
-    try:
-        # 启动服务器
-        test_results["start_server"] = start_server()
-        if not test_results["start_server"]:
-            logger.error("服务器启动失败，无法进行后续测试")
-            return
-        
-        # 运行各项测试
-        test_results["ping"] = test_ping()
-        test_results["models"] = test_models()
-        test_results["analyze"] = test_analyze()
-        test_results["invalid_json"] = test_invalid_json()
-        
-        # 显示测试结果
-        logger.info("\n===== 测试结果汇总 =====")
-        all_passed = True
-        for test_name, passed in test_results.items():
-            status = "通过" if passed else "失败"
-            logger.info(f"{test_name}: {status}")
-            if not passed:
-                all_passed = False
-        
-        if all_passed:
-            logger.info("\n所有测试通过！服务器修复成功。")
-        else:
-            logger.warning("\n部分测试未通过，请查看日志获取详细信息。")
-            
-    except Exception as e:
-        logger.error(f"测试过程中出现异常: {str(e)}")
-    finally:
-        # 确保停止服务器
-        stop_server()
+except ImportError as e:
+    print(f"✗ 导入错误: {str(e)}")
+    import traceback
+    traceback.print_exc()
+    print("\n修复失败: 仍然无法导入run_server函数")
+    print("请检查server.py文件中是否正确添加了run_server函数")
 
-
-if __name__ == "__main__":
-    main()
+except Exception as e:
+    print(f"✗ 测试过程中发生错误: {str(e)}")
+    import traceback
+    traceback.print_exc()

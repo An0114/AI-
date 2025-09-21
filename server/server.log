@@ -16,3 +16,36 @@
 2025-09-20 21:25:20,448 - server - INFO - 成功导入WebCrawler
 2025-09-20 21:37:20,045 - server - INFO - 成功导入AIModel
 2025-09-20 21:37:20,647 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:41:25,304 - server - INFO - 成功导入AIModel
+2025-09-21 16:41:25,958 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:42:37,837 - server - INFO - 成功导入AIModel
+2025-09-21 16:42:38,451 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:42:38,453 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True
+2025-09-21 16:43:53,243 - server - INFO - 成功导入AIModel
+2025-09-21 16:43:53,842 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:43:53,844 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-21 16:43:53,845 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-21 16:44:44,435 - server - INFO - 爬虫初始化成功
+2025-09-21 16:44:44,435 - server - INFO - 开始爬取URL: https://example.com, 深度: 1
+2025-09-21 16:46:54,269 - server - INFO - 成功导入AIModel
+2025-09-21 16:46:54,724 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:46:54,727 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-21 16:46:54,728 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-21 16:47:11,703 - server - INFO - 成功导入AIModel
+2025-09-21 16:47:12,202 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:47:12,205 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-21 16:47:12,205 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-21 16:47:38,446 - server - INFO - 爬虫初始化成功
+2025-09-21 16:47:38,446 - server - INFO - 开始爬取URL: https://example.com, 深度: 1
+2025-09-21 16:49:11,855 - server - INFO - 成功导入AIModel
+2025-09-21 16:49:12,430 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:49:12,435 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-21 16:49:12,435 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-21 16:58:16,767 - server - INFO - 成功导入AIModel
+2025-09-21 16:58:17,480 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:58:17,485 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-21 16:58:17,485 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-21 16:59:44,359 - server - INFO - 成功导入AIModel
+2025-09-21 16:59:45,014 - server - INFO - 成功导入WebCrawler
+2025-09-21 16:59:45,016 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-21 16:59:45,016 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
