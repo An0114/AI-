@@ -109,6 +109,11 @@ class WebCrawler:
             except Exception as e:
                 crawler_logger.error(f"关闭Selenium WebDriver时出错: {str(e)}")
     
+    def close(self):
+        """关闭爬虫资源（兼容接口）"""
+        # 调用已有的close_selenium方法来关闭资源
+        self.close_selenium()
+    
     def is_valid_url(self, url):
         """检查URL是否有效
         

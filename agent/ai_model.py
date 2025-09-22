@@ -182,12 +182,16 @@ class AIModel:
         
         Args:
             content: 要分析的内容，可以是文本、图像路径或URL
-            task (str): 分析任务，支持 'classification', 'similarity', 'captioning' 等
+            task (str): 分析任务，支持 'classification', 'similarity', 'captioning', 'summarization' 等
             
         Returns:
             dict: 分析结果
         """
         try:
+            if task == 'summarization' and isinstance(content, str):
+                # 文本总结任务
+                return self.summarize_text(content)
+                
             if self.is_mock:
                 # 如果使用模拟模型，在结果中添加标记
                 result = self._mock_analysis(content, task)
@@ -209,6 +213,103 @@ class AIModel:
             mock_result['_is_mock_result'] = True
             mock_result['_error_message'] = str(e)
             return mock_result
+    
+    def _mock_analysis(self, content, task):
+        """模拟模型的分析功能"""
+        model_logger.info(f"使用模拟模型进行{task}任务分析")
+        
+        # 生成一些合理的模拟结果
+        if task == 'classification':
+            if self.model_type == 'clip' and isinstance(content, dict) and 'text' in content and 'image' in content:
+                # 模拟CLIP零样本分类结果
+                labels = content['text'] if isinstance(content['text'], list) else [content['text']]
+                if not labels:
+                    labels = ['类别1', '类别2', '类别3']
+                
+                results = []
+                import random
+                random.seed(int(time.time()))  # 使用时间戳作为随机种子，使结果可复现
+                scores = [random.random() for _ in range(len(labels))]
+                
+                # 归一化分数
+                total = sum(scores)
+                probs = [score/total for score in scores] if total > 0 else [1.0/len(scores)]*len(scores)
+                
+                for i, (label, prob) in enumerate(zip(labels, probs)):
+                    results.append({
+                        'prompt': label,
+                        'score': float(prob),
+                        'rank': i + 1
+                    })
+                
+                # 按分数排序
+                results.sort(key=lambda x: x['score'], reverse=True)
+                
+                return {
+                    'task': 'zero_shot_classification',
+                    'image': content['image'],
+                    'prompts': labels,
+                    'results': results,
+                    'top_prediction': results[0]['prompt'] if results else None,
+                    'note': "此结果由模拟模型生成，仅供演示使用"
+                }
+                
+            elif self.model_type == 'transformer' and isinstance(content, str):
+                # 模拟文本分类结果
+                return {
+                    'task': 'text_classification',
+                    'input': content,
+                    'results': [{
+                        'label': '积极',
+                        'score': 0.75
+                    }, {
+                        'label': '消极',
+                        'score': 0.25
+                    }],
+                    'note': "此结果由模拟模型生成，仅供演示使用"
+                }
+        
+        elif task == 'similarity' and self.model_type == 'clip' and isinstance(content, dict) and 'text' in content and 'image' in content:
+            # 模拟相似度计算结果
+            import random
+            random.seed(hash(content['text'] + str(content['image'])))  # 使用内容生成随机种子
+            similarity = random.uniform(-0.5, 0.5)
+            
+            return {
+                'task': 'text_image_similarity',
+                'text': content['text'],
+                'image': content['image'],
+                'similarity_score': similarity,
+                'interpretation': self._interpret_similarity_score(similarity),
+                'note': "此结果由模拟模型生成，仅供演示使用"
+            }
+        
+        elif task == 'captioning' and self.model_type == 'clip' and isinstance(content, str):
+            # 模拟图像描述结果
+            captions = [
+                "这是一张示例图片",
+                "图片中包含一些视觉元素",
+                "这是一个模拟生成的描述",
+                "此结果由模拟模型创建"
+            ]
+            
+            return {
+                'task': 'image_captioning',
+                'image': content,
+                'captions': captions,
+                'note': "此结果由模拟模型生成，仅供演示使用"
+            }
+        
+        elif task == 'summarization' and isinstance(content, str):
+            # 模拟文本总结结果
+            return self._mock_text_summary(content, 100)
+        
+        # 默认返回
+        return {
+            'status': 'success',
+            'message': f"使用模拟{self.model_type}模型完成{task}任务",
+            'note': "此结果由模拟模型生成，仅供演示使用"
+        }
             
     def _mock_analysis(self, content, task):
         """模拟模型的分析功能"""
@@ -341,6 +442,72 @@ class AIModel:
             }
         else:
             return {'error': "Transformers模型目前仅支持文本分类任务"}
+    
+    def summarize_text(self, text, max_length=100):
+        """文本总结功能
+        
+        Args:
+            text (str): 要总结的文本
+            max_length (int): 总结的最大长度
+            
+        Returns:
+            dict: 总结结果
+        """
+        try:
+            model_logger.info(f"执行文本总结，文本长度: {len(text)}, 最大总结长度: {max_length}")
+            
+            # 如果使用模拟模型，返回模拟结果
+            if self.is_mock:
+                return self._mock_text_summary(text, max_length)
+                
+            # 真实模型的总结功能（如果有）
+            if self.model_type == 'transformer':
+                # 尝试使用transformer模型进行总结
+                # 注意：这里是简化实现，实际应用中应该使用专门的摘要模型
+                model_logger.warning("当前模型不支持真实的文本总结，返回模拟结果")
+                return self._mock_text_summary(text, max_length)
+            else:
+                model_logger.warning(f"{self.model_type}模型不支持文本总结，返回模拟结果")
+                return self._mock_text_summary(text, max_length)
+        except Exception as e:
+            model_logger.error(f"文本总结失败: {str(e)}")
+            # 出错时返回模拟结果
+            return self._mock_text_summary(text, max_length)
+    
+    def _mock_text_summary(self, text, max_length):
+        """模拟文本总结"""
+        model_logger.info("使用模拟方法进行文本总结")
+        
+        # 简单的文本总结模拟：提取前几个句子
+        sentences = text.split('.')
+        summary_sentences = []
+        current_length = 0
+        
+        for sentence in sentences:
+            if not sentence.strip():
+                continue
+            
+            sentence += '.'
+            if current_length + len(sentence) <= max_length:
+                summary_sentences.append(sentence)
+                current_length += len(sentence)
+            else:
+                break
+        
+        summary = ''.join(summary_sentences)
+        
+        # 如果提取的句子不够，就截取文本
+        if not summary or len(summary) < 10:
+            summary = text[:max_length] + '...' if len(text) > max_length else text
+        
+        return {
+            'status': 'success',
+            'original_length': len(text),
+            'summary_length': len(summary),
+            'summary': summary,
+            'is_mock': True,
+            'note': "此结果由模拟方法生成，真实应用中建议使用专门的文本摘要模型"
+        }
     
     def _clip_zero_shot_classification(self, text_prompts, image_path):
         """使用OpenCLIP进行零样本分类"""

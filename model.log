@@ -325,3 +325,451 @@ Check your internet connection or see how to run the library in offline mode at 
 2025-09-21 16:47:46 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
 2025-09-21 16:51:12 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
 2025-09-21 16:51:12 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 14:52:40 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 14:52:40 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 14:53:00 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 14:53:00 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 14:53:00 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 14:53:00 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 14:53:00 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 14:53:00 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 14:53:00 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 14:53:00 - ai_model - INFO - ========================
+
+2025-09-22 14:53:00 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 14:53:00 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 14:53:00 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 14:53:28 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 14:53:28 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 14:53:48 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 14:53:48 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 14:53:48 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 14:53:48 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 14:53:48 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 14:53:48 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 14:53:48 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 14:53:48 - ai_model - INFO - ========================
+
+2025-09-22 14:53:48 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 14:53:48 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 14:53:48 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 14:55:37 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 14:55:37 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 14:55:57 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 14:55:57 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 14:55:57 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 14:55:57 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 14:55:57 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 14:55:57 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 14:55:57 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 14:55:57 - ai_model - INFO - ========================
+
+2025-09-22 14:55:57 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 14:55:57 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 14:55:57 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 14:56:26 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 14:56:26 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 14:56:46 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 14:56:46 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 14:56:46 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 14:56:46 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 14:56:46 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 14:56:46 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 14:56:46 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 14:56:46 - ai_model - INFO - ========================
+
+2025-09-22 14:56:46 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 14:56:46 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 14:56:46 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 14:59:24 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 14:59:24 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 14:59:44 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 14:59:44 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 14:59:44 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 14:59:44 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 14:59:44 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 14:59:44 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 14:59:44 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 14:59:44 - ai_model - INFO - ========================
+
+2025-09-22 14:59:44 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 14:59:44 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 14:59:44 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:00:11 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:00:11 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:00:31 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:00:31 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:00:31 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:00:31 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:00:31 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:00:31 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:00:31 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:00:31 - ai_model - INFO - ========================
+
+2025-09-22 15:00:31 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:00:31 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:00:31 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:04:59 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:04:59 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:05:19 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:05:19 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:05:19 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:05:19 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:05:19 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:05:19 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:05:19 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:05:19 - ai_model - INFO - ========================
+
+2025-09-22 15:05:19 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:05:19 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:05:19 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:05:49 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:05:49 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:06:09 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:06:09 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:06:09 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:06:09 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:06:09 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:06:09 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:06:09 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:06:09 - ai_model - INFO - ========================
+
+2025-09-22 15:06:09 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:06:09 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:06:09 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:09:02 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:09:02 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:09:22 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:09:22 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:09:22 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:09:22 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:09:22 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:09:22 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:09:22 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:09:22 - ai_model - INFO - ========================
+
+2025-09-22 15:09:22 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:09:22 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:09:22 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:09:49 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:09:49 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:10:09 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:10:09 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:10:09 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:10:09 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:10:09 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:10:09 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:10:09 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:10:09 - ai_model - INFO - ========================
+
+2025-09-22 15:10:09 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:10:09 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:10:09 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:14:30 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:14:30 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:14:50 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:14:50 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:14:50 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:14:50 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:14:50 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:14:50 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:14:50 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:14:50 - ai_model - INFO - ========================
+
+2025-09-22 15:14:50 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:14:50 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:14:50 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:15:18 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:15:18 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:15:38 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:15:38 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:15:38 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:15:38 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:15:38 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:15:38 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:15:38 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:15:38 - ai_model - INFO - ========================
+
+2025-09-22 15:15:38 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:15:38 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:15:38 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:17:47 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:17:47 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:18:07 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:18:07 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:18:07 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:18:07 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:18:07 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:18:07 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:18:07 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:18:07 - ai_model - INFO - ========================
+
+2025-09-22 15:18:07 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:18:07 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:18:07 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:18:34 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:18:34 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:18:54 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:18:54 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:18:54 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:18:54 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:18:54 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:18:54 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:18:54 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:18:54 - ai_model - INFO - ========================
+
+2025-09-22 15:18:54 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:18:54 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:18:54 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:20:28 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:20:28 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:20:48 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:20:48 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:20:48 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:20:48 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:20:48 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:20:48 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:20:48 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:20:48 - ai_model - INFO - ========================
+
+2025-09-22 15:20:48 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:20:48 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:20:48 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:21:15 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:21:15 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:21:35 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:21:35 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:21:35 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:21:35 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:21:35 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:21:35 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:21:35 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:21:35 - ai_model - INFO - ========================
+
+2025-09-22 15:21:35 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:21:35 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:21:35 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:23:08 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:23:08 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:23:28 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:23:28 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:23:28 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:23:28 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:23:28 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:23:28 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:23:28 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:23:28 - ai_model - INFO - ========================
+
+2025-09-22 15:23:28 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:23:28 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:23:28 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:23:56 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:23:56 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:24:16 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:24:16 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:24:16 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:24:16 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:24:16 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:24:16 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:24:16 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:24:16 - ai_model - INFO - ========================
+
+2025-09-22 15:24:16 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:24:16 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:24:16 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:26:21 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:26:21 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:26:41 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:26:41 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:26:41 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:26:41 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:26:41 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:26:41 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:26:41 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:26:41 - ai_model - INFO - ========================
+
+2025-09-22 15:26:41 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:26:41 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:26:41 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:27:07 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:27:07 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:27:28 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:27:28 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:27:28 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:27:28 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:27:28 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:27:28 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:27:28 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:27:28 - ai_model - INFO - ========================
+
+2025-09-22 15:27:28 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:27:28 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:27:28 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:29:05 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:29:05 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:29:25 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:29:25 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:29:25 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:29:25 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:29:25 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:29:25 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:29:25 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:29:25 - ai_model - INFO - ========================
+
+2025-09-22 15:29:25 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:29:25 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:29:25 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:29:53 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:29:53 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:30:13 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:30:13 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:30:13 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:30:13 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:30:13 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:30:13 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:30:13 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:30:13 - ai_model - INFO - ========================
+
+2025-09-22 15:30:13 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:30:13 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:30:13 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:32:30 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:32:30 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:32:50 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:32:50 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:32:50 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:32:50 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:32:50 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:32:50 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:32:50 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:32:50 - ai_model - INFO - ========================
+
+2025-09-22 15:32:50 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:32:50 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:32:50 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:33:17 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:33:17 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:33:37 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:33:37 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:33:37 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:33:37 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:33:37 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:33:37 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:33:37 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:33:37 - ai_model - INFO - ========================
+
+2025-09-22 15:33:37 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:33:37 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:33:37 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:36:00 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:36:00 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:36:20 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:36:20 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:36:20 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:36:20 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:36:20 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:36:20 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:36:20 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:36:20 - ai_model - INFO - ========================
+
+2025-09-22 15:36:20 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:36:20 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:36:20 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:36:49 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:36:49 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:37:09 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:37:09 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:37:09 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:37:09 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:37:09 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:37:09 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:37:09 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:37:09 - ai_model - INFO - ========================
+
+2025-09-22 15:37:09 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:37:09 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:37:09 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:39:32 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:39:32 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:39:52 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:39:52 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:39:52 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:39:52 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:39:52 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:39:52 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:39:52 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:39:52 - ai_model - INFO - ========================
+
+2025-09-22 15:39:52 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:39:52 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:39:52 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-22 15:40:19 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-22 15:40:19 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-22 15:40:39 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-22 15:40:39 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-22 15:40:39 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-22 15:40:39 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-22 15:40:39 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-22 15:40:39 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-22 15:40:39 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-22 15:40:39 - ai_model - INFO - ========================
+
+2025-09-22 15:40:39 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-22 15:40:39 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
+2025-09-22 15:40:39 - ai_model - INFO - 使用模拟方法进行文本总结

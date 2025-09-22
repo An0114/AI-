@@ -57,6 +57,16 @@ def test_crawl_without_ai(url):
         # 打印响应内容以调试
         logger.debug(f"爬取响应: {json.dumps(result, ensure_ascii=False, indent=2)}")
         
+        # 添加更详细的调试信息
+        logger.info(f"响应结构: {list(result.keys())}")
+        data = result.get("data", {})
+        logger.info(f"data结构: {list(data.keys())}")
+        logger.info(f"is_mock: {data.get('is_mock', '未知')}")
+        logger.info(f"images字段是否存在: {'images' in data}")
+        if 'images' in data:
+            logger.info(f"images数量: {len(data['images'])}")
+            logger.info(f"images示例: {data['images'][:1] if data['images'] else '无'}")
+        
         # 检查响应结构
         if "status" not in result or result["status"] != "success":
             logger.error(f"响应状态错误: {result}")
@@ -74,12 +84,15 @@ def test_crawl_without_ai(url):
             # 如果是模拟结果，检查基本字段
             if "content" not in data:
                 logger.error("模拟结果中缺少content字段")
+                logger.error(f"完整响应结构: {json.dumps(result, ensure_ascii=False, indent=2)}")
                 return False
             if "images" not in data:
                 logger.error("模拟结果中缺少images字段")
+                logger.error(f"完整响应结构: {json.dumps(result, ensure_ascii=False, indent=2)}")
                 return False
             if "links" not in data:
                 logger.error("模拟结果中缺少links字段")
+                logger.error(f"完整响应结构: {json.dumps(result, ensure_ascii=False, indent=2)}")
                 return False
             
             logger.info(f"模拟结果测试通过，内容长度: {len(data['content'])}")
@@ -163,6 +176,16 @@ def test_crawl_with_ai(url):
         
         # 打印响应内容以调试
         logger.debug(f"带AI的爬取响应: {json.dumps(result, ensure_ascii=False, indent=2)}")
+        
+        # 添加更详细的调试信息
+        logger.info(f"响应结构: {list(result.keys())}")
+        data = result.get("data", {})
+        logger.info(f"data结构: {list(data.keys())}")
+        logger.info(f"is_mock: {data.get('is_mock', '未知')}")
+        logger.info(f"images字段是否存在: {'images' in data}")
+        if 'images' in data:
+            logger.info(f"images数量: {len(data['images'])}")
+            logger.info(f"images示例: {data['images'][:1] if data['images'] else '无'}")
         
         # 检查响应结构
         if "status" not in result or result["status"] != "success":
