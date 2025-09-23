@@ -326,70 +326,73 @@ def crawl():
         try:
             # 配置爬虫参数
             crawl_config = {
-                'depth': depth,
+                'max_depth': depth,
+                'max_pages': 10 if depth == 1 else 50,  # 限制爬取页面数量
                 'timeout': 30,
-                'headers': {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
-                }
+                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
+                'delay': 1,
+                'use_selenium': False,  # 不使用Selenium以加快速度
+                'follow_links': depth > 0,  # 根据深度决定是否跟随链接
+                'extract_text': True,
+                'extract_images': True,
+                'extract_links': True
             }
             
-            # 为了测试目的，直接使用模拟数据返回结果
-            # 构建模拟的爬虫结果结构 - 与测试脚本期望的格式保持一致
-            mock_result = {
-                'status': 'mock',
+            # 创建爬虫实例
+            crawler = WebCrawler(crawl_config)
+            
+            # 创建AI模型实例（如果需要）
+            ai_model = None
+            if use_ai:
+                try:
+                    ai_model = AIModel(model_type=ai_model_type)
+                    service_logger.info(f"创建AI模型实例: {ai_model_type}")
+                except Exception as ai_err:
+                    service_logger.error(f"创建AI模型失败: {str(ai_err)}")
+                    # 继续使用没有AI的爬取
+                    use_ai = False
+            
+            # 执行真实的爬取
+            service_logger.info(f"开始真实爬取: {url}")
+            crawl_result = crawler.crawl(url, depth=depth, use_ai=use_ai, ai_model=ai_model, keywords=keywords)
+            
+            # 确保爬虫资源被关闭
+            crawler.close()
+            
+            # 处理爬取结果
+            response_data = {
+                'status': 'success',
                 'url': url,
                 'depth': depth,
                 'timestamp': time.time(),
-                'is_mock': True,
-                'crawled_pages': 1,
-                'processed_time': 0.1,
-                'content': f"这是模拟的页面内容，URL: {url}",
-                'title': f"模拟页面标题 - {url}",
-                'images': [
-                    {
-                        'url': "https://example.com/mock-image-1.jpg",
-                        'alt': "模拟图片1",
-                        'caption': "这是一张模拟图片"
-                    },
-                    {
-                        'url': "https://example.com/mock-image-2.jpg",
-                        'alt': "模拟图片2",
-                        'caption': "这是另一张模拟图片"
-                    }
-                ],
-                'links': [
-                    {
-                        'url': "https://example.com/link-1",
-                        'text': "模拟链接1",
-                        'title': "模拟链接标题1"
-                    },
-                    {
-                        'url': "https://example.com/link-2",
-                        'text': "模拟链接2",
-                        'title': "模拟链接标题2"
-                    }
-                ],
-                'stats': {
-                    'success_count': 1,
-                    'error_count': 0,
-                    'total_processed': 1
-                },
-                'message': '使用模拟爬取结果进行测试'
+                'is_mock': False,  # 标记为真实结果
+                'crawled_pages': crawl_result.get('pages_crawled', 0),
+                'success_pages': crawl_result.get('success_pages', 0),
+                'failed_pages': crawl_result.get('failed_pages', 0),
+                'processed_time': crawl_result.get('duration', 0),
+                'stats': crawl_result.get('stats', {}),
+                'pages': crawl_result.get('results', [])
             }
             
-            # 如果需要使用AI分析，添加模拟的AI分析结果
-            if use_ai:
-                mock_result['summary'] = f"这是对{url}页面内容的模拟AI总结。总结了页面的主要内容和关键点，包括图片和链接的信息。"
-                mock_result['summary_stats'] = {
-                    'original_length': 500,
-                    'summary_length': 150,
-                    'is_mock': True
-                }
+            # 如果有成功的页面，提取第一个页面的详细内容
+            success_pages = [page for page in crawl_result.get('results', []) if 'error' not in page]
+            if success_pages:
+                first_page = success_pages[0]
+                # 将第一个页面的内容提升到顶层，保持向后兼容性
+                response_data['content'] = first_page.get('text', '')
+                response_data['title'] = first_page.get('title', '')
+                response_data['images'] = first_page.get('images', [])
+                response_data['links'] = first_page.get('links', [])
+                response_data['metadata'] = first_page.get('metadata', {})
+                
+                # 如果有AI分析结果，也添加到顶层
+                if 'ai_analysis' in first_page:
+                    response_data['ai_analysis'] = first_page['ai_analysis']
             
-            # 包装结果，符合测试脚本的期望格式
+            # 包装结果
             response = {
                 'status': 'success',
-                'data': mock_result,
+                'data': response_data,
                 'url': url,
                 'depth': depth,
                 'used_ai': use_ai

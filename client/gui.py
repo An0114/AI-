@@ -16,7 +16,7 @@ from PyQt5.QtWidgets import (
     QLabel, QLineEdit, QPushButton, QTextEdit, QProgressBar, 
     QTabWidget, QGroupBox, QCheckBox, QComboBox, QFileDialog, 
     QMessageBox, QListWidget, QListWidgetItem, QSplitter, QTreeWidget, 
-    QTreeWidgetItem, QHeaderView
+    QTreeWidgetItem, QHeaderView, QScrollArea, QDialog, QGridLayout
 )
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QUrl
 from PyQt5.QtGui import QFont, QIcon, QColor, QTextCursor
@@ -26,6 +26,8 @@ import matplotlib
 matplotlib.use('Agg')  # 使用非交互式后端
 import matplotlib.pyplot as plt
 plt.rcParams["font.family"] = ["SimHei", "WenQuanYi Micro Hei", "Heiti TC"]
+
+from PIL import Image, ImageQt
 
 # 添加项目根目录到路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -351,8 +353,38 @@ class MainWindow(QMainWindow):
         details_layout = QVBoxLayout()
         self.result_details_text = QTextEdit()
         self.result_details_text.setReadOnly(True)
+        # 启用富文本显示
+        self.result_details_text.setAcceptRichText(True)
         details_layout.addWidget(self.result_details_text)
+        
+        # 操作按钮
+        button_layout = QHBoxLayout()
+        
+        # 查看完整JSON按钮
+        self.view_json_button = QPushButton("查看完整JSON数据")
+        self.view_json_button.clicked.connect(self.view_full_json)
+        self.view_json_button.setEnabled(False)  # 初始禁用
+        button_layout.addWidget(self.view_json_button)
+        
+        # 复制结果按钮
+        self.copy_result_button = QPushButton("复制结果")
+        self.copy_result_button.clicked.connect(self.copy_result)
+        self.copy_result_button.setEnabled(False)  # 初始禁用
+        button_layout.addWidget(self.copy_result_button)
+        
+        # 导出结果按钮
+        self.export_result_button = QPushButton("导出结果")
+        self.export_result_button.clicked.connect(self.export_result)
+        self.export_result_button.setEnabled(False)  # 初始禁用
+        button_layout.addWidget(self.export_result_button)
+        
+        button_layout.addStretch()  # 右侧留白
+        details_layout.addLayout(button_layout)
+        
         details_group.setLayout(details_layout)
+        
+        # 初始化当前JSON结果存储
+        self.current_json_result = None
         
         # 添加到分割器
         splitter.addWidget(results_group)
@@ -496,13 +528,163 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage("就绪")
         
     def show_result_details(self, item):
-        """显示结果详情"""
+        """显示结果详情，解析JSON数据并生成更易读的内容"""
         index = item.data(Qt.UserRole)
         if 0 <= index < len(self.crawl_results):
             result = self.crawl_results[index]
-            # 格式化结果为JSON字符串
-            formatted_result = json.dumps(result, ensure_ascii=False, indent=2)
-            self.result_details_text.setText(formatted_result)
+            
+            # 重置当前图片列表
+            self.current_images = []
+            self.current_result = result
+            
+            # 尝试解析JSON数据并生成易读内容
+            try:
+                # 提取关键信息
+                url = result.get('url', '未知URL')
+                title = result.get('title', '未获取标题')
+                status = result.get('status', '未知状态')
+                crawled_pages = result.get('crawled_pages', 0)
+                success_pages = result.get('success_pages', 0)
+                failed_pages = result.get('failed_pages', 0)
+                processed_time = result.get('processed_time', 0)
+                is_mock = result.get('is_mock', False)
+                
+                # 构建基础信息
+                readable_content = f"# 爬取结果详情\n\n"
+                readable_content += f"## 基本信息\n"
+                readable_content += f"- **URL**: {url}\n"
+                readable_content += f"- **标题**: {title}\n"
+                readable_content += f"- **状态**: {status}\n"
+                readable_content += f"- **爬取深度**: {result.get('depth', 1)}\n"
+                readable_content += f"- **总页数**: {crawled_pages}\n"
+                readable_content += f"- **成功页数**: {success_pages}\n"
+                readable_content += f"- **失败页数**: {failed_pages}\n"
+                readable_content += f"- **处理时间**: {processed_time:.2f}秒\n"
+                readable_content += f"- **是否模拟数据**: {'是' if is_mock else '否'}\n\n"
+                
+                # 处理页面内容
+                content = result.get('content', '')
+                if content:
+                    # 尝试使用AI模型进行文本总结
+                    try:
+                        from agent.ai_model import AIModel
+                        ai_model = AIModel(model_type='transformer')
+                        summary_result = ai_model.summarize_text(content, max_length=300)
+                        
+                        readable_content += f"## 页面内容摘要\n"
+                        readable_content += f"{summary_result.get('summary', content[:300] + '...')}\n\n"
+                        
+                        if 'note' in summary_result:
+                            readable_content += f"> **备注**: {summary_result['note']}\n\n"
+                    except Exception as e:
+                        # 如果AI总结失败，就直接显示部分内容
+                        readable_content += f"## 页面内容预览\n"
+                        readable_content += f"{content[:300] + '...' if len(content) > 300 else content}\n\n"
+                        readable_content += f"> **提示**: 未能进行AI总结 ({str(e)})\n\n"
+                
+                # 处理图片信息
+                images = result.get('images', [])
+                if images:
+                    readable_content += f"## 图片信息 ({len(images)}张)\n"
+                    for i, img in enumerate(images[:5]):  # 只显示前5张图片
+                        img_url = img.get('url', '未知URL')
+                        alt = img.get('alt', '')
+                        caption = img.get('caption', '')
+                        
+                        # 存储图片URL用于预览
+                        if not hasattr(self, 'current_images'):
+                            self.current_images = []
+                        self.current_images.append(img_url)
+                        
+                        # 添加图片预览按钮
+                        readable_content += f"- **图片{i+1}**: [{img_url}](javascript:void(0)) [预览]" + f"(preview_image_{i})" + "\n"
+                        if alt:
+                            readable_content += f"  - 描述: {alt}\n"
+                        if caption:
+                            readable_content += f"  - 说明: {caption}\n"
+                    
+                    # 添加查看所有图片按钮
+                    readable_content += f"\n[查看所有图片](javascript:void(0)) [查看所有]" + "(view_all_images)" + "\n"
+                    
+                    if len(images) > 5:
+                        readable_content += f"- ... 还有{len(images)-5}张图片未显示\n"
+                    readable_content += "\n"
+                
+                # 处理链接信息
+                links = result.get('links', [])
+                if links:
+                    readable_content += f"## 链接信息 ({len(links)}个)\n"
+                    for i, link in enumerate(links[:10]):  # 只显示前10个链接
+                        link_url = link.get('url', '未知URL')
+                        link_text = link.get('text', '')
+                        link_title = link.get('title', '')
+                        readable_content += f"- **链接{i+1}**: [{link_text or link_url[:50]}]({link_url})\n"
+                        if link_title:
+                            readable_content += f"  - 标题: {link_title}\n"
+                    if len(links) > 10:
+                        readable_content += f"- ... 还有{len(links)-10}个链接未显示\n"
+                    readable_content += "\n"
+                
+                # 处理统计信息
+                stats = result.get('stats', {})
+                if stats:
+                    readable_content += f"## 统计信息\n"
+                    for key, value in stats.items():
+                        readable_content += f"- **{key}**: {value}\n"
+                    readable_content += "\n"
+                
+                # 处理AI分析结果（如果有）
+                ai_analysis = result.get('ai_analysis', None)
+                if ai_analysis:
+                    readable_content += f"## AI分析结果\n"
+                    # 格式化AI分析结果
+                    if isinstance(ai_analysis, dict):
+                        for key, value in ai_analysis.items():
+                            if isinstance(value, dict):
+                                readable_content += f"- **{key}**:\n"
+                                for sub_key, sub_value in value.items():
+                                    readable_content += f"  - {sub_key}: {sub_value}\n"
+                            elif isinstance(value, list):
+                                readable_content += f"- **{key}**: ({len(value)}项)\n"
+                                for i, item in enumerate(value[:5]):
+                                    readable_content += f"  - {i+1}. {item}\n"
+                                if len(value) > 5:
+                                    readable_content += f"  - ... 还有{len(value)-5}项未显示\n"
+                            else:
+                                readable_content += f"- **{key}**: {value}\n"
+                    else:
+                        readable_content += f"{ai_analysis}\n"
+                    readable_content += "\n"
+                
+                # 添加完整JSON数据的链接
+                readable_content += f"## 完整数据\n"
+                readable_content += "点击下方按钮查看完整JSON数据\n"
+                
+                # 显示易读内容
+                self.result_details_text.setText(readable_content)
+                
+                # 设置链接点击事件处理
+                self.result_details_text.anchorClicked.connect(self.on_link_clicked)
+                
+                # 保存原始JSON数据，用于完整查看
+                self.current_json_result = result
+                
+                # 启用按钮
+                self.view_json_button.setEnabled(True)
+                self.copy_result_button.setEnabled(True)
+                self.export_result_button.setEnabled(True)
+            except Exception as e:
+                # 如果解析失败，回退到原始JSON显示
+                formatted_result = json.dumps(result, ensure_ascii=False, indent=2)
+                self.result_details_text.setText(f"解析数据时出错: {str(e)}\n\n以下是原始JSON数据:\n{formatted_result}")
+                
+                # 保存原始JSON数据
+                self.current_json_result = result
+                
+                # 启用按钮
+                self.view_json_button.setEnabled(True)
+                self.copy_result_button.setEnabled(True)
+                self.export_result_button.setEnabled(True)
             
     def start_analysis(self):
         """开始AI分析"""
@@ -546,6 +728,304 @@ class MainWindow(QMainWindow):
         
         # 恢复按钮状态
         self.analyze_button.setEnabled(True)
+    
+    def on_link_clicked(self, url):
+        """处理链接点击事件"""
+        url_str = url.toString()
+        
+        # 处理图片预览链接
+        if url_str.startswith("preview_image_"):
+            try:
+                img_index = int(url_str.split("_")[-1])
+                if hasattr(self, 'current_images') and 0 <= img_index < len(self.current_images):
+                    self.preview_image(self.current_images[img_index])
+            except ValueError:
+                pass
+        # 处理查看所有图片链接
+        elif url_str == "view_all_images":
+            self.view_all_images()
+        # 处理普通URL链接
+        elif url_str.startswith("http"):
+            # 可以选择在默认浏览器中打开链接
+            from PyQt5.QtGui import QDesktopServices
+            QDesktopServices.openUrl(url)
+    
+    def preview_image(self, img_url):
+        """预览单张图片"""
+        try:
+            # 创建图片预览窗口
+            preview_window = QDialog(self)
+            preview_window.setWindowTitle(f"图片预览: {img_url}")
+            preview_window.resize(800, 600)
+            
+            layout = QVBoxLayout(preview_window)
+            
+            # 图片标签
+            img_label = QLabel()
+            img_label.setAlignment(Qt.AlignCenter)
+            img_label.setText("正在加载图片...")
+            
+            # 使用线程加载图片，避免UI卡顿
+            from PyQt5.QtCore import QThread, pyqtSignal
+            
+            class ImageLoader(QThread):
+                image_loaded = pyqtSignal(object)
+                load_error = pyqtSignal(str)
+                
+                def __init__(self, url):
+                    super().__init__()
+                    self.url = url
+                    
+                def run(self):
+                    try:
+                        import requests
+                        from PyQt5.QtGui import QPixmap
+                        from io import BytesIO
+                        
+                        # 尝试请求图片
+                        response = requests.get(self.url, timeout=10)
+                        response.raise_for_status()
+                        
+                        # 加载图片数据
+                        pixmap = QPixmap()
+                        pixmap.loadFromData(BytesIO(response.content).read())
+                        
+                        # 发送信号
+                        self.image_loaded.emit(pixmap)
+                    except Exception as e:
+                        self.load_error.emit(str(e))
+            
+            # 创建并启动加载线程
+            loader = ImageLoader(img_url)
+            loader.image_loaded.connect(lambda pixmap: self.display_image(img_label, pixmap))
+            loader.load_error.connect(lambda error: img_label.setText(f"无法加载图片: {error}"))
+            loader.start()
+            
+            layout.addWidget(img_label)
+            
+            # 按钮
+            button_layout = QHBoxLayout()
+            copy_url_button = QPushButton("复制图片URL")
+            copy_url_button.clicked.connect(lambda: QApplication.clipboard().setText(img_url))
+            save_button = QPushButton("保存图片")
+            save_button.clicked.connect(lambda: self.save_image(img_url))
+            close_button = QPushButton("关闭")
+            close_button.clicked.connect(preview_window.close)
+            
+            button_layout.addWidget(copy_url_button)
+            button_layout.addWidget(save_button)
+            button_layout.addWidget(close_button)
+            layout.addLayout(button_layout)
+            
+            preview_window.exec_()
+        except Exception as e:
+            QMessageBox.critical(self, "预览失败", f"无法预览图片: {str(e)}")
+    
+    def display_image(self, label, pixmap):
+        """在标签中显示图片，并自动调整大小"""
+        if not pixmap.isNull():
+            # 调整图片大小以适应窗口，但保持宽高比
+            scaled_pixmap = pixmap.scaled(
+                780, 500, Qt.KeepAspectRatio, Qt.SmoothTransformation
+            )
+            label.setPixmap(scaled_pixmap)
+            label.setText("")
+        else:
+            label.setText("图片加载失败")
+    
+    def save_image(self, img_url):
+        """保存图片到本地"""
+        try:
+            # 获取文件名
+            import os
+            filename = os.path.basename(img_url.split('?')[0]) or "image.jpg"
+            
+            # 打开文件保存对话框
+            file_path, _ = QFileDialog.getSaveFileName(
+                self, "保存图片", filename, "图片文件 (*.png *.jpg *.jpeg *.gif *.bmp)"
+            )
+            
+            if file_path:
+                import requests
+                
+                # 下载并保存图片
+                response = requests.get(img_url, timeout=10)
+                response.raise_for_status()
+                
+                with open(file_path, 'wb') as f:
+                    f.write(response.content)
+                
+                self.append_log(f"图片已保存到: {file_path}")
+        except Exception as e:
+            QMessageBox.critical(self, "保存失败", f"无法保存图片: {str(e)}")
+    
+    def view_all_images(self):
+        """查看所有图片"""
+        if hasattr(self, 'current_result'):
+            images = self.current_result.get('images', [])
+            if images:
+                # 创建图片浏览窗口
+                gallery_window = QDialog(self)
+                gallery_window.setWindowTitle(f"图片浏览 ({len(images)}张)")
+                gallery_window.resize(900, 700)
+                
+                layout = QVBoxLayout(gallery_window)
+                
+                # 创建滚动区域
+                scroll_area = QScrollArea()
+                scroll_area.setWidgetResizable(True)
+                
+                # 创建图片容器
+                container = QWidget()
+                grid_layout = QGridLayout(container)
+                
+                # 加载图片到网格布局
+                for i, img_data in enumerate(images):
+                    img_url = img_data.get('url', '')
+                    alt = img_data.get('alt', '')
+                    
+                    # 创建图片项
+                    img_item = QWidget()
+                    img_item_layout = QVBoxLayout(img_item)
+                    
+                    # 图片标签
+                    img_label = QLabel()
+                    img_label.setAlignment(Qt.AlignCenter)
+                    img_label.setMinimumHeight(150)
+                    img_label.setText(f"图片 {i+1}\n加载中...")
+                    img_item_layout.addWidget(img_label)
+                    
+                    # 图片信息
+                    info_label = QLabel(f"图片 {i+1}: {os.path.basename(img_url) or '未知'}")
+                    info_label.setWordWrap(True)
+                    img_item_layout.addWidget(info_label)
+                    
+                    # 添加到网格
+                    row, col = divmod(i, 3)  # 3列网格
+                    grid_layout.addWidget(img_item, row, col)
+                    
+                    # 使用线程加载图片
+                    class ThumbnailLoader(QThread):
+                        image_loaded = pyqtSignal(object, int)
+                        
+                        def __init__(self, url, index):
+                            super().__init__()
+                            self.url = url
+                            self.index = index
+                        
+                        def run(self):
+                            try:
+                                import requests
+                                from PyQt5.QtGui import QPixmap
+                                from io import BytesIO
+                                
+                                response = requests.get(self.url, timeout=5)
+                                response.raise_for_status()
+                                
+                                pixmap = QPixmap()
+                                pixmap.loadFromData(BytesIO(response.content).read())
+                                
+                                self.image_loaded.emit(pixmap, self.index)
+                            except:
+                                pass  # 加载失败则保持默认状态
+                    
+                    # 创建并启动加载线程
+                    loader = ThumbnailLoader(img_url, i)
+                    loader.image_loaded.connect(lambda pixmap, idx=i, label=img_label: 
+                                               self.display_thumbnail(label, pixmap, idx+1))
+                    loader.start()
+                    
+                    # 设置点击事件，预览大图
+                    img_label.mousePressEvent = lambda event, url=img_url: self.preview_image(url)
+                    info_label.mousePressEvent = lambda event, url=img_url: self.preview_image(url)
+                
+                scroll_area.setWidget(container)
+                layout.addWidget(scroll_area)
+                
+                # 关闭按钮
+                close_button = QPushButton("关闭")
+                close_button.clicked.connect(gallery_window.close)
+                layout.addWidget(close_button, alignment=Qt.AlignRight)
+                
+                gallery_window.exec_()
+    
+    def display_thumbnail(self, label, pixmap, img_num):
+        """显示缩略图"""
+        if not pixmap.isNull():
+            # 调整为缩略图大小
+            scaled_pixmap = pixmap.scaled(
+                250, 150, Qt.KeepAspectRatio, Qt.SmoothTransformation
+            )
+            label.setPixmap(scaled_pixmap)
+            label.setText("")
+            # 添加鼠标悬停提示
+            label.setToolTip(f"点击预览图片 {img_num}")
+            # 使标签可点击
+            label.setCursor(Qt.PointingHandCursor)
+    
+    def view_full_json(self):
+        """查看完整的JSON数据"""
+        if self.current_json_result:
+            # 创建新窗口显示完整JSON数据
+            json_window = QDialog(self)
+            json_window.setWindowTitle("完整JSON数据")
+            json_window.resize(800, 600)
+            
+            layout = QVBoxLayout(json_window)
+            
+            # JSON文本编辑框
+            json_text = QTextEdit()
+            json_text.setReadOnly(True)
+            # 设置字体为等宽字体，便于阅读JSON
+            font = QFont("Consolas", 10)
+            json_text.setFont(font)
+            # 格式化JSON数据
+            formatted_json = json.dumps(self.current_json_result, ensure_ascii=False, indent=2)
+            json_text.setText(formatted_json)
+            layout.addWidget(json_text)
+            
+            # 按钮
+            button_layout = QHBoxLayout()
+            copy_button = QPushButton("复制JSON")
+            copy_button.clicked.connect(lambda: QApplication.clipboard().setText(formatted_json))
+            close_button = QPushButton("关闭")
+            close_button.clicked.connect(json_window.close)
+            
+            button_layout.addWidget(copy_button)
+            button_layout.addStretch()
+            button_layout.addWidget(close_button)
+            layout.addLayout(button_layout)
+            
+            json_window.exec_()
+    
+    def copy_result(self):
+        """复制当前结果"""
+        if self.result_details_text.toPlainText():
+            QApplication.clipboard().setText(self.result_details_text.toPlainText())
+            self.append_log("结果已复制到剪贴板")
+    
+    def export_result(self):
+        """导出当前结果"""
+        if self.current_json_result:
+            # 打开文件保存对话框
+            file_path, _ = QFileDialog.getSaveFileName(
+                self, "导出结果", "", "JSON文件 (*.json);;文本文件 (*.txt)"
+            )
+            
+            if file_path:
+                try:
+                    if file_path.endswith('.json'):
+                        # 导出为JSON格式
+                        with open(file_path, 'w', encoding='utf-8') as f:
+                            json.dump(self.current_json_result, f, ensure_ascii=False, indent=2)
+                    else:
+                        # 导出为文本格式
+                        with open(file_path, 'w', encoding='utf-8') as f:
+                            f.write(self.result_details_text.toPlainText())
+                    
+                    self.append_log(f"结果已导出到: {file_path}")
+                except Exception as e:
+                    QMessageBox.critical(self, "导出失败", f"无法导出结果: {str(e)}")
         
     def save_settings(self):
         """保存设置"""

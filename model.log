@@ -773,3 +773,257 @@ Check your internet connection or see how to run the library in offline mode at 
 2025-09-22 15:40:39 - ai_model - WARNING - clip 模拟模型已初始化
 2025-09-22 15:40:39 - ai_model - INFO - 执行文本总结，文本长度: 41, 最大总结长度: 100
 2025-09-22 15:40:39 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-23 14:51:22 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-23 14:51:22 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-23 14:51:42 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 14:51:42 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 14:51:42 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-23 14:51:42 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-23 14:51:42 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-23 14:51:42 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-23 14:51:42 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-23 14:51:42 - ai_model - INFO - ========================
+
+2025-09-23 14:51:42 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-23 14:51:43 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:43 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 14:51:43 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:44 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:44 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 14:51:44 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:46 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:46 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 14:51:46 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:48 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:48 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 14:51:48 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:49 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:49 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 14:51:49 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:51 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:51 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 14:51:51 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:53 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:53 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 14:51:53 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:55 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:51:55 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 14:51:55 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 14:55:30 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-23 14:55:30 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-23 14:55:50 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 14:55:50 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 14:55:50 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-23 14:55:50 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-23 14:55:50 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-23 14:55:50 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-23 14:55:50 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-23 14:55:50 - ai_model - INFO - ========================
+
+2025-09-23 14:55:50 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-23 14:55:50 - ai_model - INFO - 使用模拟模型进行classification任务分析
+2025-09-23 14:55:52 - ai_model - INFO - 使用模拟模型进行classification任务分析
+2025-09-23 14:55:53 - ai_model - INFO - 使用模拟模型进行classification任务分析
+2025-09-23 14:55:55 - ai_model - INFO - 使用模拟模型进行classification任务分析
+2025-09-23 14:55:57 - ai_model - INFO - 使用模拟模型进行classification任务分析
+2025-09-23 14:55:59 - ai_model - INFO - 使用模拟模型进行classification任务分析
+2025-09-23 14:56:00 - ai_model - INFO - 使用模拟模型进行classification任务分析
+2025-09-23 14:56:02 - ai_model - INFO - 使用模拟模型进行classification任务分析
+2025-09-23 15:23:56 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:23:56 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:23:56 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-23 15:23:56 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
+2025-09-23 15:23:56 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-23 15:24:16 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:24:16 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:24:16 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-23 15:24:16 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
+2025-09-23 15:24:16 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-23 15:24:36 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:24:36 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:24:36 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-23 15:24:36 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
+2025-09-23 15:24:36 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-23 15:24:56 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:24:56 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:24:56 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-23 15:24:56 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
+2025-09-23 15:24:56 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-23 15:34:12 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:34:12 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:34:12 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-23 15:34:12 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
+2025-09-23 15:34:12 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-23 15:35:23 - ai_model - WARNING - OpenCLIP库加载失败: Failed to download weights for tag 'laion2b_s34b_b79k': Failed to download file (open_clip_pytorch_model.bin) for laion/CLIP-ViT-B-32-laion2B-s34B-b79K. Last error: An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2025-09-23 15:35:23 - ai_model - INFO - 尝试使用transformers库加载CLIP模型
+2025-09-23 15:35:43 - ai_model - WARNING - transformers库加载CLIP模型失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:35:43 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:35:43 - ai_model - WARNING - 使用模拟CLIP模型，所有结果为示例数据
+2025-09-23 15:35:43 - ai_model - INFO - 
+===== 模型加载建议 =====
+2025-09-23 15:35:43 - ai_model - INFO - 1. 检查网络连接，确保能访问 huggingface.co
+2025-09-23 15:35:43 - ai_model - INFO - 2. 如果网络受限，可以手动下载模型权重并设置环境变量 CLIP_MODEL_PATH
+2025-09-23 15:35:43 - ai_model - INFO - 3. 模拟模型仅用于演示，不提供真实的AI分析能力
+2025-09-23 15:35:43 - ai_model - INFO - ========================
+
+2025-09-23 15:35:43 - ai_model - WARNING - clip 模拟模型已初始化
+2025-09-23 15:35:44 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:44 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:44 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:45 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:45 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:45 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:46 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:46 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:46 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:48 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:48 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:48 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:50 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:50 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:50 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:51 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:51 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:51 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:53 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:53 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:53 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:54 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:54 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:54 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:57 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:57 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:57 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:59 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:35:59 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:35:59 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:00 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:01 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:01 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:01 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:03 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:04 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:04 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:04 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:06 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:06 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:06 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:08 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:09 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:11 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:11 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:11 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:12 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:12 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:12 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:14 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:15 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:17 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:17 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:17 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:20 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:20 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:20 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:22 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:22 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:22 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:26 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:26 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:26 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:28 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:28 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:28 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:31 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:31 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:31 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:33 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:33 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:33 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:36 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:36 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:36 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:38 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:38 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:38 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:41 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:41 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:41 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:44 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:44 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:44 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:47 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:47 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:47 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:49 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:49 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:49 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:52 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:52 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:52 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:54 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:54 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:54 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:57 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:57 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:57 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:59 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:36:59 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:36:59 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:03 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:03 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:03 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:06 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:06 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:06 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:08 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:08 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:08 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:11 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:11 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:11 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:13 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:13 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:13 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:16 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:16 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:16 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:19 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:19 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:19 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:21 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:21 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:21 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:23 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:23 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:23 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:24 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:37:24 - ai_model - ERROR - 分析失败: can only concatenate list (not "str") to list
+2025-09-23 15:37:24 - ai_model - INFO - 使用模拟模型进行similarity任务分析
+2025-09-23 15:40:11 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:40:11 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:40:11 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-23 15:40:11 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
+2025-09-23 15:40:11 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-23 15:42:42 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:42:42 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:42:42 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-23 15:42:42 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
+2025-09-23 15:42:42 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-23 15:49:10 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-23 15:49:10 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-23 15:49:10 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-23 15:49:10 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
+2025-09-23 15:49:10 - ai_model - INFO - 使用模拟方法进行文本总结

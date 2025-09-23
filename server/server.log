@@ -185,3 +185,38 @@
 2025-09-22 15:43:45,411 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
 2025-09-22 15:43:45,412 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
 2025-09-22 15:43:58,186 - server - INFO - 开始爬取网站: https://zhuanlan.zhihu.com/p/136355306, 深度: 1, 使用AI: True
+2025-09-23 14:43:05,777 - server - INFO - 成功导入AIModel
+2025-09-23 14:43:06,725 - server - INFO - 成功导入WebCrawler
+2025-09-23 14:43:06,728 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-23 14:43:06,729 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-23 14:43:30,485 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 1, 使用AI: False
+2025-09-23 14:44:12,615 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 1, 使用AI: True
+2025-09-23 14:50:51,031 - server - INFO - 成功导入AIModel
+2025-09-23 14:50:51,891 - server - INFO - 成功导入WebCrawler
+2025-09-23 14:50:51,893 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-23 14:50:51,893 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-23 14:51:01,515 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 1, 使用AI: True
+2025-09-23 14:51:42,707 - server - INFO - 创建AI模型实例: clip
+2025-09-23 14:51:42,707 - server - INFO - 开始真实爬取: https://movie.douban.com/top250?start=225
+2025-09-23 14:54:22,993 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 1, 使用AI: False
+2025-09-23 14:54:22,994 - server - INFO - 开始真实爬取: https://movie.douban.com/top250?start=225
+2025-09-23 14:55:10,434 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 1, 使用AI: True
+2025-09-23 14:55:50,479 - server - INFO - 创建AI模型实例: clip
+2025-09-23 14:55:50,480 - server - INFO - 开始真实爬取: https://movie.douban.com/top250?start=225
+2025-09-23 14:57:31,241 - server - INFO - 开始爬取网站: https://movie.douban.com/top250, 深度: 1, 使用AI: False
+2025-09-23 14:57:31,242 - server - INFO - 开始真实爬取: https://movie.douban.com/top250
+2025-09-23 15:22:36,952 - server - INFO - 成功导入AIModel
+2025-09-23 15:22:37,754 - server - INFO - 成功导入WebCrawler
+2025-09-23 15:22:37,758 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-23 15:22:37,758 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-23 15:23:04,007 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 1, 使用AI: False
+2025-09-23 15:23:04,008 - server - INFO - 开始真实爬取: https://movie.douban.com/top250?start=225
+2025-09-23 15:33:10,812 - server - INFO - 成功导入AIModel
+2025-09-23 15:33:11,443 - server - INFO - 成功导入WebCrawler
+2025-09-23 15:33:11,446 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-23 15:33:11,446 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-23 15:33:16,010 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 1, 使用AI: False
+2025-09-23 15:33:16,011 - server - INFO - 开始真实爬取: https://movie.douban.com/top250?start=225
+2025-09-23 15:35:02,852 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 5, 使用AI: True
+2025-09-23 15:35:43,800 - server - INFO - 创建AI模型实例: clip
+2025-09-23 15:35:43,800 - server - INFO - 开始真实爬取: https://movie.douban.com/top250?start=225
