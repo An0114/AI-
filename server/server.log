@@ -220,3 +220,9 @@
 2025-09-23 15:35:02,852 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 5, 使用AI: True
 2025-09-23 15:35:43,800 - server - INFO - 创建AI模型实例: clip
 2025-09-23 15:35:43,800 - server - INFO - 开始真实爬取: https://movie.douban.com/top250?start=225
+2025-09-24 15:30:48,514 - server - INFO - 成功导入AIModel
+2025-09-24 15:30:49,313 - server - INFO - 成功导入WebCrawler
+2025-09-24 15:30:49,316 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-24 15:30:49,316 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-24 15:31:41,702 - server - INFO - 开始爬取网站: https://movie.douban.com/top250?start=225, 深度: 1, 使用AI: False
+2025-09-24 15:31:41,702 - server - INFO - 开始真实爬取: https://movie.douban.com/top250?start=225

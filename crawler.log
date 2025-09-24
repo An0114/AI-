@@ -377,3 +377,15 @@
 2025-09-23 15:37:24 - web_crawler - ERROR - AI过滤失败: can only concatenate list (not "str") to list
 2025-09-23 15:37:25 - web_crawler - INFO - 爬取完成: 50 页面，成功: 48，失败: 2
 2025-09-23 15:37:25 - web_crawler - INFO - 耗时: 101.65 秒
+2025-09-24 15:31:41 - web_crawler - INFO - 爬取: https://movie.douban.com/top250?start=225 (深度: 0/1)
+2025-09-24 15:31:43 - web_crawler - INFO - 爬取: https://accounts.douban.com/passport/login (深度: 1/1)
+2025-09-24 15:31:44 - web_crawler - INFO - 爬取: https://www.douban.com/doubanapp/app (深度: 1/1)
+2025-09-24 15:31:46 - web_crawler - INFO - 爬取: javascript:// void 0; (深度: 1/1)
+2025-09-24 15:31:47 - web_crawler - INFO - 爬取: https://www.douban.com/doubanapp/redirect (深度: 1/1)
+2025-09-24 15:31:48 - web_crawler - INFO - 爬取: https://www.douban.com (深度: 1/1)
+2025-09-24 15:31:49 - web_crawler - INFO - 爬取: https://book.douban.com (深度: 1/1)
+2025-09-24 15:31:51 - web_crawler - INFO - 爬取: https://movie.douban.com (深度: 1/1)
+2025-09-24 15:31:52 - web_crawler - INFO - 爬取: https://music.douban.com (深度: 1/1)
+2025-09-24 15:31:54 - web_crawler - INFO - 爬取: https://www.douban.com/podcast (深度: 1/1)
+2025-09-24 15:31:55 - web_crawler - INFO - 爬取完成: 10 页面，成功: 8，失败: 2
+2025-09-24 15:31:55 - web_crawler - INFO - 耗时: 14.02 秒
