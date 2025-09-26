@@ -13,7 +13,7 @@ import requests
 import time
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
-    QLabel, QLineEdit, QPushButton, QTextEdit, QProgressBar, 
+    QLabel, QLineEdit, QPushButton, QTextEdit, QTextBrowser, QProgressBar, 
     QTabWidget, QGroupBox, QCheckBox, QComboBox, QFileDialog, 
     QMessageBox, QListWidget, QListWidgetItem, QSplitter, QTreeWidget, 
     QTreeWidgetItem, QHeaderView, QScrollArea, QDialog, QGridLayout
@@ -351,7 +351,7 @@ class MainWindow(QMainWindow):
         # 创建结果详情显示区域
         details_group = QGroupBox("结果详情")
         details_layout = QVBoxLayout()
-        self.result_details_text = QTextEdit()
+        self.result_details_text = QTextBrowser()  # 使用QTextBrowser替代QTextEdit以支持链接点击
         self.result_details_text.setReadOnly(True)
         # 启用富文本显示
         self.result_details_text.setAcceptRichText(True)
@@ -365,6 +365,12 @@ class MainWindow(QMainWindow):
         self.view_json_button.clicked.connect(self.view_full_json)
         self.view_json_button.setEnabled(False)  # 初始禁用
         button_layout.addWidget(self.view_json_button)
+        
+        # 查看所有图片按钮
+        self.view_all_images_button = QPushButton("查看所有图片")
+        self.view_all_images_button.clicked.connect(self.view_all_images)
+        self.view_all_images_button.setEnabled(False)  # 初始禁用
+        button_layout.addWidget(self.view_all_images_button)
         
         # 复制结果按钮
         self.copy_result_button = QPushButton("复制结果")
@@ -569,6 +575,9 @@ class MainWindow(QMainWindow):
                     try:
                         from agent.ai_model import AIModel
                         ai_model = AIModel(model_type='transformer')
+                        # 确保content是字符串，如果是JSON对象则转换为字符串
+                        if not isinstance(content, str):
+                            content = json.dumps(content, ensure_ascii=False, indent=2)
                         summary_result = ai_model.summarize_text(content, max_length=300)
                         
                         readable_content += f"## 页面内容摘要\n"
@@ -585,44 +594,41 @@ class MainWindow(QMainWindow):
                 # 处理图片信息
                 images = result.get('images', [])
                 if images:
+                    # 保存当前结果的图片列表，供on_link_clicked方法使用
+                    self.current_images = []
                     readable_content += f"## 图片信息 ({len(images)}张)\n"
-                    for i, img in enumerate(images[:5]):  # 只显示前5张图片
+                    # 显示所有图片
+                    for i, img in enumerate(images):
                         img_url = img.get('url', '未知URL')
                         alt = img.get('alt', '')
                         caption = img.get('caption', '')
                         
-                        # 存储图片URL用于预览
-                        if not hasattr(self, 'current_images'):
-                            self.current_images = []
+                        # 将图片URL添加到current_images列表
                         self.current_images.append(img_url)
                         
-                        # 添加图片预览按钮
-                        readable_content += f"- **图片{i+1}**: [{img_url}](javascript:void(0)) [预览]" + f"(preview_image_{i})" + "\n"
+                        # 添加图片预览按钮 - 使用正确的Markdown链接格式
+                        readable_content += f"- **图片{i+1}**: [{os.path.basename(img_url) or '查看图片'}]({img_url}) [预览](preview:{img_url})\n"
                         if alt:
                             readable_content += f"  - 描述: {alt}\n"
                         if caption:
                             readable_content += f"  - 说明: {caption}\n"
                     
-                    # 添加查看所有图片按钮
-                    readable_content += f"\n[查看所有图片](javascript:void(0)) [查看所有]" + "(view_all_images)" + "\n"
-                    
-                    if len(images) > 5:
-                        readable_content += f"- ... 还有{len(images)-5}张图片未显示\n"
+                    # 添加查看所有图片按钮 - 使用正确的Markdown链接格式
+                    readable_content += f"\n[查看所有图片](view-all-images)\n"
                     readable_content += "\n"
                 
                 # 处理链接信息
                 links = result.get('links', [])
                 if links:
                     readable_content += f"## 链接信息 ({len(links)}个)\n"
-                    for i, link in enumerate(links[:10]):  # 只显示前10个链接
+                    # 显示所有链接
+                    for i, link in enumerate(links):
                         link_url = link.get('url', '未知URL')
                         link_text = link.get('text', '')
                         link_title = link.get('title', '')
                         readable_content += f"- **链接{i+1}**: [{link_text or link_url[:50]}]({link_url})\n"
                         if link_title:
                             readable_content += f"  - 标题: {link_title}\n"
-                    if len(links) > 10:
-                        readable_content += f"- ... 还有{len(links)-10}个链接未显示\n"
                     readable_content += "\n"
                 
                 # 处理统计信息
@@ -646,10 +652,9 @@ class MainWindow(QMainWindow):
                                     readable_content += f"  - {sub_key}: {sub_value}\n"
                             elif isinstance(value, list):
                                 readable_content += f"- **{key}**: ({len(value)}项)\n"
-                                for i, item in enumerate(value[:5]):
+                                # 显示所有列表项
+                                for i, item in enumerate(value):
                                     readable_content += f"  - {i+1}. {item}\n"
-                                if len(value) > 5:
-                                    readable_content += f"  - ... 还有{len(value)-5}项未显示\n"
                             else:
                                 readable_content += f"- **{key}**: {value}\n"
                     else:
@@ -668,11 +673,16 @@ class MainWindow(QMainWindow):
                 
                 # 保存原始JSON数据，用于完整查看
                 self.current_json_result = result
+                # 保存当前结果，供view_all_images等方法使用
+                self.current_result = result
                 
                 # 启用按钮
                 self.view_json_button.setEnabled(True)
                 self.copy_result_button.setEnabled(True)
                 self.export_result_button.setEnabled(True)
+                # 有图片时启用查看所有图片按钮
+                has_images = 'images' in result and len(result.get('images', [])) > 0
+                self.view_all_images_button.setEnabled(has_images)
             except Exception as e:
                 # 如果解析失败，回退到原始JSON显示
                 formatted_result = json.dumps(result, ensure_ascii=False, indent=2)
@@ -680,6 +690,8 @@ class MainWindow(QMainWindow):
                 
                 # 保存原始JSON数据
                 self.current_json_result = result
+                # 保存当前结果，供view_all_images等方法使用
+                self.current_result = result
                 
                 # 启用按钮
                 self.view_json_button.setEnabled(True)
@@ -734,17 +746,16 @@ class MainWindow(QMainWindow):
         url_str = url.toString()
         
         # 处理图片预览链接
-        if url_str.startswith("preview_image_"):
+        if url_str.startswith("preview:"):
             try:
-                img_index = int(url_str.split("_")[-1])
-                if hasattr(self, 'current_images') and 0 <= img_index < len(self.current_images):
-                    self.preview_image(self.current_images[img_index])
-            except ValueError:
-                pass
+                img_url = url_str[8:]  # 移除前缀 "preview:" 获取实际URL
+                self.preview_image(img_url)
+            except Exception as e:
+                QMessageBox.warning(self, "预览失败", f"无法预览图片: {str(e)}")
         # 处理查看所有图片链接
-        elif url_str == "view_all_images":
+        elif url_str == "view-all-images":
             self.view_all_images()
-        # 处理普通URL链接
+        # 处理普通URL链接（包括图片链接本身）
         elif url_str.startswith("http"):
             # 可以选择在默认浏览器中打开链接
             from PyQt5.QtGui import QDesktopServices
@@ -859,6 +870,43 @@ class MainWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "保存失败", f"无法保存图片: {str(e)}")
     
+    # 定义ThumbnailLoader类在线程外部，避免闭包陷阱
+    class ThumbnailLoader(QThread):
+        image_loaded = pyqtSignal(object, int)
+        
+        def __init__(self, url, index):
+            super().__init__()
+            self.url = url
+            self.index = index
+            self.is_running = True
+        
+        def run(self):
+            try:
+                if not self.is_running:
+                    return
+                
+                import requests
+                from PyQt5.QtGui import QPixmap
+                from io import BytesIO
+                
+                response = requests.get(self.url, timeout=5)
+                response.raise_for_status()
+                
+                if not self.is_running:
+                    return
+                
+                pixmap = QPixmap()
+                pixmap.loadFromData(BytesIO(response.content).read())
+                
+                if self.is_running:
+                    self.image_loaded.emit(pixmap, self.index)
+            except:
+                pass  # 加载失败则保持默认状态
+        
+        def stop(self):
+            self.is_running = False
+            self.wait(1000)  # 等待最多1秒让线程结束
+    
     def view_all_images(self):
         """查看所有图片"""
         if hasattr(self, 'current_result'):
@@ -878,6 +926,9 @@ class MainWindow(QMainWindow):
                 # 创建图片容器
                 container = QWidget()
                 grid_layout = QGridLayout(container)
+                
+                # 用于存储所有加载线程，以便在窗口关闭时正确终止
+                loaders = []
                 
                 # 加载图片到网格布局
                 for i, img_data in enumerate(images):
@@ -904,33 +955,9 @@ class MainWindow(QMainWindow):
                     row, col = divmod(i, 3)  # 3列网格
                     grid_layout.addWidget(img_item, row, col)
                     
-                    # 使用线程加载图片
-                    class ThumbnailLoader(QThread):
-                        image_loaded = pyqtSignal(object, int)
-                        
-                        def __init__(self, url, index):
-                            super().__init__()
-                            self.url = url
-                            self.index = index
-                        
-                        def run(self):
-                            try:
-                                import requests
-                                from PyQt5.QtGui import QPixmap
-                                from io import BytesIO
-                                
-                                response = requests.get(self.url, timeout=5)
-                                response.raise_for_status()
-                                
-                                pixmap = QPixmap()
-                                pixmap.loadFromData(BytesIO(response.content).read())
-                                
-                                self.image_loaded.emit(pixmap, self.index)
-                            except:
-                                pass  # 加载失败则保持默认状态
-                    
                     # 创建并启动加载线程
-                    loader = ThumbnailLoader(img_url, i)
+                    loader = self.ThumbnailLoader(img_url, i)
+                    loaders.append(loader)
                     loader.image_loaded.connect(lambda pixmap, idx=i, label=img_label: 
                                                self.display_thumbnail(label, pixmap, idx+1))
                     loader.start()
@@ -946,6 +973,14 @@ class MainWindow(QMainWindow):
                 close_button = QPushButton("关闭")
                 close_button.clicked.connect(gallery_window.close)
                 layout.addWidget(close_button, alignment=Qt.AlignRight)
+                
+                # 在窗口关闭时停止所有线程
+                def cleanup_threads():
+                    for loader in loaders:
+                        if loader.isRunning():
+                            loader.stop()
+                
+                gallery_window.finished.connect(cleanup_threads)
                 
                 gallery_window.exec_()
     

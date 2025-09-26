@@ -454,6 +454,21 @@ class AIModel:
             dict: 总结结果
         """
         try:
+            # 确保text是字符串类型
+            if not isinstance(text, str):
+                model_logger.warning(f"输入类型不是字符串，尝试转换: {type(text)}")
+                try:
+                    text = str(text)
+                except:
+                    # 如果转换失败，返回空字符串或默认值
+                    model_logger.error("无法将输入转换为字符串")
+                    return {
+                        'status': 'error',
+                        'error': '输入内容无法转换为文本进行总结',
+                        'is_mock': True,
+                        'summary': '无法总结的内容'
+                    }
+            
             model_logger.info(f"执行文本总结，文本长度: {len(text)}, 最大总结长度: {max_length}")
             
             # 如果使用模拟模型，返回模拟结果
@@ -471,43 +486,97 @@ class AIModel:
                 return self._mock_text_summary(text, max_length)
         except Exception as e:
             model_logger.error(f"文本总结失败: {str(e)}")
-            # 出错时返回模拟结果
-            return self._mock_text_summary(text, max_length)
+            # 出错时返回模拟结果或错误信息
+            try:
+                return self._mock_text_summary(text, max_length)
+            except:
+                # 如果连模拟总结都失败，返回简单的错误信息
+                return {
+                    'status': 'error',
+                    'error': f'总结过程中发生错误: {str(e)}',
+                    'is_mock': True,
+                    'summary': '无法生成总结'
+                }
     
     def _mock_text_summary(self, text, max_length):
         """模拟文本总结"""
         model_logger.info("使用模拟方法进行文本总结")
         
-        # 简单的文本总结模拟：提取前几个句子
-        sentences = text.split('.')
-        summary_sentences = []
-        current_length = 0
-        
-        for sentence in sentences:
-            if not sentence.strip():
-                continue
+        try:
+            # 确保text是字符串类型
+            if not isinstance(text, str):
+                try:
+                    text = str(text)
+                except:
+                    model_logger.error("无法将输入转换为字符串")
+                    return {
+                        'status': 'error',
+                        'error': '输入内容无法转换为文本进行总结',
+                        'is_mock': True,
+                        'summary': '无法总结的内容'
+                    }
             
-            sentence += '.'
-            if current_length + len(sentence) <= max_length:
-                summary_sentences.append(sentence)
-                current_length += len(sentence)
-            else:
-                break
-        
-        summary = ''.join(summary_sentences)
-        
-        # 如果提取的句子不够，就截取文本
-        if not summary or len(summary) < 10:
-            summary = text[:max_length] + '...' if len(text) > max_length else text
-        
-        return {
-            'status': 'success',
-            'original_length': len(text),
-            'summary_length': len(summary),
-            'summary': summary,
-            'is_mock': True,
-            'note': "此结果由模拟方法生成，真实应用中建议使用专门的文本摘要模型"
-        }
+            # 处理空文本
+            if not text or len(text.strip()) == 0:
+                return {
+                    'status': 'success',
+                    'original_length': 0,
+                    'summary_length': 0,
+                    'summary': '无内容可总结',
+                    'is_mock': True,
+                    'note': "输入内容为空"
+                }
+            
+            # 简单的文本总结模拟：提取前几个句子
+            try:
+                sentences = text.split('.')
+                summary_sentences = []
+                current_length = 0
+                
+                for sentence in sentences:
+                    if not sentence.strip():
+                        continue
+                    
+                    sentence_with_period = sentence + '.'
+                    if current_length + len(sentence_with_period) <= max_length:
+                        summary_sentences.append(sentence_with_period)
+                        current_length += len(sentence_with_period)
+                    else:
+                        # 如果还有空间，可以添加最后一个不完整的句子
+                        if current_length < max_length:
+                            remaining_space = max_length - current_length
+                            partial_sentence = sentence[:remaining_space] + '...'
+                            summary_sentences.append(partial_sentence)
+                        break
+                
+                summary = ''.join(summary_sentences)
+            except Exception as e:
+                model_logger.warning(f"句子分割失败，使用文本截取代替: {str(e)}")
+                summary = ''
+            
+            # 如果提取的句子不够或失败，就截取文本
+            if not summary or len(summary) < 10 or len(summary) > max_length * 1.5:
+                try:
+                    summary = text[:max_length] + '...' if len(text) > max_length else text
+                except:
+                    summary = '无法生成有效的总结'
+            
+            return {
+                'status': 'success',
+                'original_length': len(text),
+                'summary_length': len(summary),
+                'summary': summary,
+                'is_mock': True,
+                'note': "此结果由模拟方法生成，真实应用中建议使用专门的文本摘要模型"
+            }
+        except Exception as e:
+            model_logger.error(f"模拟文本总结失败: {str(e)}")
+            return {
+                'status': 'error',
+                'error': f'模拟总结过程中发生错误: {str(e)}',
+                'is_mock': True,
+                'summary': '无法生成总结'
+            }
     
     def _clip_zero_shot_classification(self, text_prompts, image_path):
         """使用OpenCLIP进行零样本分类"""

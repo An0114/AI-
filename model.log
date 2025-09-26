@@ -1045,3 +1045,51 @@ Check your internet connection or see how to run the library in offline mode at 
 2025-09-24 15:33:13 - ai_model - WARNING - transformer 模拟模型已初始化
 2025-09-24 15:33:13 - ai_model - INFO - 执行文本总结，文本长度: 4198, 最大总结长度: 300
 2025-09-24 15:33:13 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-26 15:26:54 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-26 15:26:54 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-26 15:26:54 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-26 15:26:54 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
+2025-09-26 15:26:54 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-26 15:31:24 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-26 15:31:24 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-26 15:31:24 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-26 15:31:24 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
+2025-09-26 15:31:24 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-26 15:41:38 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-26 15:41:38 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-26 15:41:38 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-26 15:41:38 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
+2025-09-26 15:41:38 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-26 15:56:06 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-26 15:56:06 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-26 15:56:06 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-26 15:56:06 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
+2025-09-26 15:56:06 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-26 17:11:57 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-26 17:11:57 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-26 17:11:57 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-26 17:11:57 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
+2025-09-26 17:11:57 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-26 17:23:47 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-26 17:23:47 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-26 17:23:47 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-26 17:23:47 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
+2025-09-26 17:23:47 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-26 17:30:33 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-26 17:30:33 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-26 17:30:33 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-26 17:30:33 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
+2025-09-26 17:30:33 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-26 17:35:31 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-26 17:35:31 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-26 17:35:31 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-26 17:35:31 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
+2025-09-26 17:35:31 - ai_model - INFO - 使用模拟方法进行文本总结
