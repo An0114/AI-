@@ -443,12 +443,13 @@ class AIModel:
         else:
             return {'error': "Transformers模型目前仅支持文本分类任务"}
     
-    def summarize_text(self, text, max_length=100):
+    def summarize_text(self, text, max_length=100, url=None):
         """文本总结功能
         
         Args:
             text (str): 要总结的文本
             max_length (int): 总结的最大长度
+            url (str, optional): 文本来源URL，用于识别抖音等特殊内容
             
         Returns:
             dict: 总结结果
@@ -473,22 +474,22 @@ class AIModel:
             
             # 如果使用模拟模型，返回模拟结果
             if self.is_mock:
-                return self._mock_text_summary(text, max_length)
+                return self._mock_text_summary(text, max_length, url)
                 
             # 真实模型的总结功能（如果有）
             if self.model_type == 'transformer':
                 # 尝试使用transformer模型进行总结
                 # 注意：这里是简化实现，实际应用中应该使用专门的摘要模型
                 model_logger.warning("当前模型不支持真实的文本总结，返回模拟结果")
-                return self._mock_text_summary(text, max_length)
+                return self._mock_text_summary(text, max_length, url)
             else:
                 model_logger.warning(f"{self.model_type}模型不支持文本总结，返回模拟结果")
-                return self._mock_text_summary(text, max_length)
+                return self._mock_text_summary(text, max_length, url)
         except Exception as e:
             model_logger.error(f"文本总结失败: {str(e)}")
             # 出错时返回模拟结果或错误信息
             try:
-                return self._mock_text_summary(text, max_length)
+                return self._mock_text_summary(text, max_length, url)
             except:
                 # 如果连模拟总结都失败，返回简单的错误信息
                 return {
@@ -498,7 +499,7 @@ class AIModel:
                     'summary': '无法生成总结'
                 }
     
-    def _mock_text_summary(self, text, max_length):
+    def _mock_text_summary(self, text, max_length, url=None):
         """模拟文本总结"""
         model_logger.info("使用模拟方法进行文本总结")
         
@@ -527,39 +528,118 @@ class AIModel:
                     'note': "输入内容为空"
                 }
             
-            # 简单的文本总结模拟：提取前几个句子
-            try:
-                sentences = text.split('.')
-                summary_sentences = []
-                current_length = 0
-                
-                for sentence in sentences:
-                    if not sentence.strip():
-                        continue
-                    
-                    sentence_with_period = sentence + '.'
-                    if current_length + len(sentence_with_period) <= max_length:
-                        summary_sentences.append(sentence_with_period)
-                        current_length += len(sentence_with_period)
-                    else:
-                        # 如果还有空间，可以添加最后一个不完整的句子
-                        if current_length < max_length:
-                            remaining_space = max_length - current_length
-                            partial_sentence = sentence[:remaining_space] + '...'
-                            summary_sentences.append(partial_sentence)
-                        break
-                
-                summary = ''.join(summary_sentences)
-            except Exception as e:
-                model_logger.warning(f"句子分割失败，使用文本截取代替: {str(e)}")
-                summary = ''
+            # 检查是否为抖音网页
+            is_douyin = False
+            if url:
+                is_douyin = 'douyin' in url.lower() or 'tiktok' in url.lower()
             
-            # 如果提取的句子不够或失败，就截取文本
-            if not summary or len(summary) < 10 or len(summary) > max_length * 1.5:
+            # 如果是抖音内容，进行特殊处理
+            if is_douyin:
+                import re
+                
+                # 1. 提取标题
+                title_match = re.search(r'<title>(.*?)</title>', text)
+                if not title_match:
+                    title_match = re.search(r'"title":"(.*?)",', text)
+                title = title_match.group(1) if title_match else "抖音视频"
+                
+                # 2. 提取描述内容
+                desc_match = re.search(r'"desc":"(.*?)",', text) or re.search(r'描述：(.*?)\n', text)
+                description = desc_match.group(1) if desc_match else ""
+                
+                # 3. 提取用户信息
+                user_match = re.search(r'"nickname":"(.*?)",', text) or re.search(r'用户名：(.*?)\n', text)
+                user_name = user_match.group(1) if user_match else "未知用户"
+                
+                # 4. 提取统计数据
+                like_match = re.search(r'"like_count":(\d+)', text) or re.search(r'点赞：(\d+)', text)
+                likes = like_match.group(1) if like_match else "0"
+                
+                comment_match = re.search(r'"comment_count":(\d+)', text) or re.search(r'评论：(\d+)', text)
+                comments = comment_match.group(1) if comment_match else "0"
+                
+                share_match = re.search(r'"share_count":(\d+)', text) or re.search(r'分享：(\d+)', text)
+                shares = share_match.group(1) if share_match else "0"
+                
+                # 构建抖音内容总结
+                summary_parts = ["【抖音内容总结】"]
+                summary_parts.append(f"标题：{title}")
+                summary_parts.append(f"发布者：{user_name}")
+                if description:
+                    summary_parts.append(f"内容描述：{description}")
+                summary_parts.append(f"点赞数：{likes}")
+                summary_parts.append(f"评论数：{comments}")
+                summary_parts.append(f"分享数：{shares}")
+                summary_parts.append("此视频内容已被爬取，可在结果页面查看所有视频。")
+                
+                summary = '\n'.join(summary_parts)
+                
+                # 确保不超过最大长度
+                if len(summary) > max_length:
+                    # 先尝试缩短描述部分
+                    if description:
+                        summary_parts = ["【抖音内容总结】"]
+                        summary_parts.append(f"标题：{title}")
+                        summary_parts.append(f"发布者：{user_name}")
+                        
+                        # 计算剩余可用长度
+                        used_length = len('\n'.join(summary_parts)) + len('\n内容描述：') + len('\n点赞数：{likes}\n评论数：{comments}\n分享数：{shares}\n此视频内容已被爬取，可在结果页面查看所有视频。')
+                        available_length = max_length - used_length
+                        if available_length > 20:
+                            summary_parts.append(f"内容描述：{description[:available_length]}...")
+                        
+                        summary_parts.append(f"点赞数：{likes}")
+                        summary_parts.append(f"评论数：{comments}")
+                        summary_parts.append(f"分享数：{shares}")
+                        summary_parts.append("此视频内容已被爬取，可在结果页面查看所有视频。")
+                        summary = '\n'.join(summary_parts)
+                        
+                    # 如果还是太长，就截取整个总结
+                    if len(summary) > max_length:
+                        summary = summary[:max_length] + '...'
+            else:
+                # 通用网页的总结逻辑
+                # 简单的文本总结模拟：提取前几个句子
                 try:
-                    summary = text[:max_length] + '...' if len(text) > max_length else text
-                except:
-                    summary = '无法生成有效的总结'
+                    # 优先使用中文标点符号分割
+                    sentences = re.split(r'(?<=[。！？])', text)
+                    if len(sentences) <= 1:
+                        # 如果中文分割效果不好，尝试英文标点
+                        sentences = text.split('.')
+                        
+                    summary_sentences = []
+                    current_length = 0
+                    
+                    for sentence in sentences:
+                        if not sentence.strip():
+                            continue
+                        
+                        # 根据原始分割方式添加适当的标点
+                        separator = '。' if len(sentences) > 1 and '。' in text else '.'
+                        sentence_with_sep = sentence + separator
+                        
+                        if current_length + len(sentence_with_sep) <= max_length:
+                            summary_sentences.append(sentence_with_sep)
+                            current_length += len(sentence_with_sep)
+                        else:
+                            # 如果还有空间，可以添加最后一个不完整的句子
+                            if current_length < max_length:
+                                remaining_space = max_length - current_length
+                                partial_sentence = sentence[:remaining_space] + '...'
+                                summary_sentences.append(partial_sentence)
+                            break
+                    
+                    summary = ''.join(summary_sentences)
+                except Exception as e:
+                    model_logger.warning(f"句子分割失败，使用文本截取代替: {str(e)}")
+                    summary = ''
+                
+                # 如果提取的句子不够或失败，就截取文本
+                if not summary or len(summary) < 10 or len(summary) > max_length * 1.5:
+                    try:
+                        summary = text[:max_length] + '...' if len(text) > max_length else text
+                    except:
+                        summary = '无法生成有效的总结'
             
             return {
                 'status': 'success',
