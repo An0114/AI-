@@ -372,6 +372,12 @@ class MainWindow(QMainWindow):
         self.view_all_images_button.setEnabled(False)  # 初始禁用
         button_layout.addWidget(self.view_all_images_button)
         
+        # 查看所有视频按钮
+        self.view_all_videos_button = QPushButton("查看所有视频")
+        self.view_all_videos_button.clicked.connect(self.view_all_videos)
+        self.view_all_videos_button.setEnabled(False)  # 初始禁用
+        button_layout.addWidget(self.view_all_videos_button)
+        
         # 复制结果按钮
         self.copy_result_button = QPushButton("复制结果")
         self.copy_result_button.clicked.connect(self.copy_result)
@@ -568,28 +574,38 @@ class MainWindow(QMainWindow):
                 readable_content += f"- **处理时间**: {processed_time:.2f}秒\n"
                 readable_content += f"- **是否模拟数据**: {'是' if is_mock else '否'}\n\n"
                 
-                # 处理页面内容
-                content = result.get('content', '')
-                if content:
-                    # 尝试使用AI模型进行文本总结
-                    try:
-                        from agent.ai_model import AIModel
-                        ai_model = AIModel(model_type='transformer')
-                        # 确保content是字符串，如果是JSON对象则转换为字符串
-                        if not isinstance(content, str):
-                            content = json.dumps(content, ensure_ascii=False, indent=2)
-                        summary_result = ai_model.summarize_text(content, max_length=300)
-                        
-                        readable_content += f"## 页面内容摘要\n"
-                        readable_content += f"{summary_result.get('summary', content[:300] + '...')}\n\n"
-                        
-                        if 'note' in summary_result:
-                            readable_content += f"> **备注**: {summary_result['note']}\n\n"
-                    except Exception as e:
-                        # 如果AI总结失败，就直接显示部分内容
-                        readable_content += f"## 页面内容预览\n"
-                        readable_content += f"{content[:300] + '...' if len(content) > 300 else content}\n\n"
-                        readable_content += f"> **提示**: 未能进行AI总结 ({str(e)})\n\n"
+                # 检查是否有自动生成的总结
+                auto_summary = result.get('summary', None)
+                if auto_summary and isinstance(auto_summary, dict):
+                    readable_content += f"## 页面内容摘要\n"
+                    readable_content += f"{auto_summary.get('summary', '无法生成总结')}\n\n"
+                    
+                    if 'note' in auto_summary:
+                        readable_content += f"> **备注**: {auto_summary['note']}\n\n"
+                else:
+                    # 处理页面内容
+                    content = result.get('content', '')
+                    if content:
+                        # 尝试使用AI模型进行文本总结
+                        try:
+                            from agent.ai_model import AIModel
+                            ai_model = AIModel(model_type='transformer')
+                            # 确保content是字符串，如果是JSON对象则转换为字符串
+                            if not isinstance(content, str):
+                                content = json.dumps(content, ensure_ascii=False, indent=2)
+                            # 传递URL参数，以便AI模型识别抖音等特殊内容
+                            summary_result = ai_model.summarize_text(content, max_length=300, url=url)
+                            
+                            readable_content += f"## 页面内容摘要\n"
+                            readable_content += f"{summary_result.get('summary', content[:300] + '...')}\n\n"
+                            
+                            if 'note' in summary_result:
+                                readable_content += f"> **备注**: {summary_result['note']}\n\n"
+                        except Exception as e:
+                            # 如果AI总结失败，就直接显示部分内容
+                            readable_content += f"## 页面内容预览\n"
+                            readable_content += f"{content[:300] + '...' if len(content) > 300 else content}\n\n"
+                            readable_content += f"> **提示**: 未能进行AI总结 ({str(e)})\n\n"
                 
                 # 处理图片信息
                 images = result.get('images', [])
@@ -615,6 +631,33 @@ class MainWindow(QMainWindow):
                     
                     # 添加查看所有图片按钮 - 使用正确的Markdown链接格式
                     readable_content += f"\n[查看所有图片](view-all-images)\n"
+                    readable_content += "\n"
+                
+                # 处理视频信息
+                videos = result.get('videos', [])
+                if videos:
+                    # 保存当前结果的视频列表，供视频查看功能使用
+                    self.current_videos = []
+                    readable_content += f"## 视频信息 ({len(videos)}个)\n"
+                    # 显示所有视频
+                    for i, video in enumerate(videos):
+                        video_url = video.get('url', '未知URL')
+                        video_title = video.get('title', '')
+                        video_type = video.get('type', '')
+                        
+                        # 将视频URL添加到current_videos列表
+                        self.current_videos.append(video_url)
+                        
+                        # 添加视频预览按钮 - 使用正确的Markdown链接格式
+                        video_name = os.path.basename(video_url) or '查看视频'
+                        readable_content += f"- **视频{i+1}**: [{video_name}]({video_url}) [播放](preview-video:{video_url})\n"
+                        if video_title:
+                            readable_content += f"  - 标题: {video_title}\n"
+                        if video_type:
+                            readable_content += f"  - 类型: {video_type}\n"
+                    
+                    # 添加查看所有视频按钮 - 使用正确的Markdown链接格式
+                    readable_content += f"\n[查看所有视频](view-all-videos)\n"
                     readable_content += "\n"
                 
                 # 处理链接信息
@@ -683,6 +726,10 @@ class MainWindow(QMainWindow):
                 # 有图片时启用查看所有图片按钮
                 has_images = 'images' in result and len(result.get('images', [])) > 0
                 self.view_all_images_button.setEnabled(has_images)
+                
+                # 有视频时启用查看所有视频按钮
+                has_videos = 'videos' in result and len(result.get('videos', [])) > 0
+                self.view_all_videos_button.setEnabled(has_videos)
             except Exception as e:
                 # 如果解析失败，回退到原始JSON显示
                 formatted_result = json.dumps(result, ensure_ascii=False, indent=2)
@@ -752,9 +799,19 @@ class MainWindow(QMainWindow):
                 self.preview_image(img_url)
             except Exception as e:
                 QMessageBox.warning(self, "预览失败", f"无法预览图片: {str(e)}")
+        # 处理视频播放链接
+        elif url_str.startswith("preview-video:"):
+            try:
+                video_url = url_str[14:]  # 移除前缀 "preview-video:" 获取实际URL
+                self.preview_video(video_url)
+            except Exception as e:
+                QMessageBox.warning(self, "播放失败", f"无法播放视频: {str(e)}")
         # 处理查看所有图片链接
         elif url_str == "view-all-images":
             self.view_all_images()
+        # 处理查看所有视频链接
+        elif url_str == "view-all-videos":
+            self.view_all_videos()
         # 处理普通URL链接（包括图片链接本身）
         elif url_str.startswith("http"):
             # 可以选择在默认浏览器中打开链接
@@ -997,6 +1054,232 @@ class MainWindow(QMainWindow):
             label.setToolTip(f"点击预览图片 {img_num}")
             # 使标签可点击
             label.setCursor(Qt.PointingHandCursor)
+    
+    def preview_video(self, video_url):
+        """预览单个视频"""
+        try:
+            # 创建预览窗口
+            preview_window = QDialog(self)
+            preview_window.setWindowTitle("视频预览")
+            preview_window.resize(800, 600)
+            
+            # 创建布局
+            layout = QVBoxLayout(preview_window)
+            
+            # 创建视频播放器
+            video_widget = QLabel()
+            video_widget.setAlignment(Qt.AlignCenter)
+            video_widget.setText("正在加载视频...")
+            
+            # 检查是否是本地文件路径
+            is_local_file = os.path.exists(video_url) or video_url.startswith(('http://', 'https://'))
+            
+            if not is_local_file:
+                # 尝试使用PyQt5的QMediaPlayer播放视频
+                from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+                from PyQt5.QtMultimediaWidgets import QVideoWidget
+                from PyQt5.QtCore import QUrl
+                
+                # 创建视频播放器组件
+                player = QMediaPlayer()
+                video_widget = QVideoWidget()
+                player.setVideoOutput(video_widget)
+                
+                # 设置视频源
+                video_url = QUrl(video_url)
+                player.setMedia(QMediaContent(video_url))
+                
+                # 自动播放
+                player.play()
+                
+                # 视频控件
+                controls_layout = QHBoxLayout()
+                play_button = QPushButton("播放/暂停")
+                play_button.clicked.connect(lambda: player.pause() if player.state() == QMediaPlayer.PlayingState else player.play())
+                
+                controls_layout.addWidget(play_button)
+                controls_layout.addStretch()
+            
+            layout.addWidget(video_widget)
+            
+            # 按钮
+            button_layout = QHBoxLayout()
+            copy_url_button = QPushButton("复制视频URL")
+            copy_url_button.clicked.connect(lambda: QApplication.clipboard().setText(video_url.toString() if isinstance(video_url, QUrl) else video_url))
+            
+            # 如果是本地文件或者是可下载的视频，添加保存按钮
+            if is_local_file or (isinstance(video_url, QUrl) and video_url.toString().startswith(('http://', 'https://'))):
+                save_button = QPushButton("保存视频")
+                save_button.clicked.connect(lambda: self.save_video(video_url.toString() if isinstance(video_url, QUrl) else video_url))
+                button_layout.addWidget(save_button)
+                
+            button_layout.addWidget(copy_url_button)
+            
+            close_button = QPushButton("关闭")
+            close_button.clicked.connect(preview_window.close)
+            button_layout.addWidget(close_button)
+            
+            # 添加控件布局（如果创建了）
+            if 'controls_layout' in locals():
+                layout.addLayout(controls_layout)
+                
+            layout.addLayout(button_layout)
+            
+            preview_window.exec_()
+        except Exception as e:
+            QMessageBox.critical(self, "预览失败", f"无法预览视频: {str(e)}")
+            
+    def save_video(self, video_url):
+        """保存视频到本地"""
+        try:
+            # 获取文件名
+            if os.path.exists(video_url):
+                # 已经是本地文件，直接另存为
+                default_filename = os.path.basename(video_url)
+            else:
+                # 从URL中提取文件名
+                default_filename = os.path.basename(video_url) or f"video_{int(time.time())}.mp4"
+                
+            # 打开文件保存对话框
+            filename, _ = QFileDialog.getSaveFileName(
+                self, "保存视频", default_filename, "视频文件 (*.mp4 *.avi *.mkv)")
+                
+            if not filename:
+                return
+                
+            # 如果是远程URL，下载视频
+            if not os.path.exists(video_url):
+                import requests
+                
+                # 显示下载进度
+                progress_dialog = QProgressDialog("正在下载视频...", "取消", 0, 100, self)
+                progress_dialog.setWindowTitle("下载中")
+                progress_dialog.setWindowModality(Qt.WindowModal)
+                progress_dialog.setValue(0)
+                progress_dialog.show()
+                
+                # 下载视频文件
+                response = requests.get(video_url, stream=True)
+                total_size = int(response.headers.get('content-length', 0))
+                
+                with open(filename, 'wb') as f:
+                    downloaded_size = 0
+                    for data in response.iter_content(chunk_size=8192):
+                        if progress_dialog.wasCanceled():
+                            f.close()
+                            os.remove(filename)
+                            return
+                            
+                        f.write(data)
+                        downloaded_size += len(data)
+                        
+                        if total_size > 0:
+                            progress = int(100 * downloaded_size / total_size)
+                            progress_dialog.setValue(progress)
+                            
+            # 复制已存在的本地文件
+            else:
+                import shutil
+                shutil.copy2(video_url, filename)
+                
+            QMessageBox.information(self, "保存成功", f"视频已保存到: {filename}")
+            
+        except Exception as e:
+            QMessageBox.critical(self, "保存失败", f"无法保存视频: {str(e)}")
+            
+    def view_all_videos(self):
+        """查看所有视频"""
+        try:
+            # 检查是否有视频可显示
+            if not hasattr(self, 'current_videos') or not self.current_videos:
+                # 尝试从当前结果中获取视频
+                if hasattr(self, 'current_result'):
+                    if 'content' in self.current_result and isinstance(self.current_result['content'], dict):
+                        self.current_videos = [video.get('url', '') for video in self.current_result['content'].get('videos', [])]
+                    else:
+                        self.current_videos = [video.get('url', '') for video in self.current_result.get('videos', [])]
+                
+            if not self.current_videos:
+                QMessageBox.information(self, "提示", "没有可显示的视频")
+                return
+                
+            # 创建视频浏览窗口
+            video_window = QDialog(self)
+            video_window.setWindowTitle("所有视频")
+            video_window.resize(900, 700)
+            
+            # 创建滚动区域
+            scroll_area = QScrollArea()
+            scroll_area.setWidgetResizable(True)
+            
+            # 创建容器部件
+            container = QWidget()
+            layout = QGridLayout(container)
+            
+            # 显示所有视频
+            row = 0
+            col = 0
+            max_cols = 2  # 每行最多显示2个视频预览
+            
+            for video_url in self.current_videos:
+                if col >= max_cols:
+                    col = 0
+                    row += 1
+                    
+                # 创建视频预览项容器
+                video_item = QWidget()
+                video_layout = QVBoxLayout(video_item)
+                
+                # 创建缩略图标签
+                thumbnail_label = QLabel()
+                thumbnail_label.setAlignment(Qt.AlignCenter)
+                thumbnail_label.setMinimumSize(350, 250)
+                thumbnail_label.setMaximumSize(350, 250)
+                thumbnail_label.setText("点击播放视频")
+                thumbnail_label.setStyleSheet("background-color: #f0f0f0; border: 1px solid #cccccc;")
+                
+                # 创建信息标签
+                info_label = QLabel()
+                info_label.setWordWrap(True)
+                info_label.setMaximumWidth(350)
+                info_label.setText(os.path.basename(video_url) or video_url[:50])
+                
+                # 创建播放按钮
+                play_button = QPushButton("播放视频")
+                play_button.clicked.connect(lambda checked, url=video_url: self.preview_video(url))
+                
+                # 添加到布局
+                video_layout.addWidget(thumbnail_label)
+                video_layout.addWidget(info_label)
+                video_layout.addWidget(play_button)
+                
+                # 添加到网格布局
+                layout.addWidget(video_item, row, col)
+                col += 1
+                
+                # 绑定点击事件
+                thumbnail_label.mousePressEvent = lambda event, url=video_url: self.preview_video(url)
+                info_label.mousePressEvent = lambda event, url=video_url: self.preview_video(url)
+            
+            # 设置滚动区域
+            scroll_area.setWidget(container)
+            
+            # 创建主布局
+            main_layout = QVBoxLayout(video_window)
+            main_layout.addWidget(scroll_area)
+            
+            # 添加关闭按钮
+            button_layout = QHBoxLayout()
+            close_button = QPushButton("关闭")
+            close_button.clicked.connect(video_window.close)
+            button_layout.addStretch()
+            button_layout.addWidget(close_button)
+            main_layout.addLayout(button_layout)
+            
+            # 显示窗口
+            video_window.exec_()
+        except Exception as e:
+            QMessageBox.critical(self, "错误", f"查看视频失败: {str(e)}")
     
     def view_full_json(self):
         """查看完整的JSON数据"""

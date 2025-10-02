@@ -1093,3 +1093,45 @@ Check your internet connection or see how to run the library in offline mode at 
 2025-09-26 17:35:31 - ai_model - WARNING - transformer 模拟模型已初始化
 2025-09-26 17:35:31 - ai_model - INFO - 执行文本总结，文本长度: 4458, 最大总结长度: 300
 2025-09-26 17:35:31 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-29 16:17:06 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-29 16:17:06 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-29 16:17:06 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-29 16:17:06 - ai_model - INFO - 执行文本总结，文本长度: 3511, 最大总结长度: 300
+2025-09-29 16:17:06 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-29 16:17:06 - ai_model - WARNING - 句子分割失败，使用文本截取代替: cannot access local variable 're' where it is not associated with a value
+2025-09-29 16:20:36 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-29 16:20:36 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-29 16:20:36 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-29 16:20:36 - ai_model - INFO - 执行文本总结，文本长度: 3, 最大总结长度: 300
+2025-09-29 16:20:36 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-29 16:20:36 - ai_model - WARNING - 句子分割失败，使用文本截取代替: cannot access local variable 're' where it is not associated with a value
+2025-09-29 16:30:54 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-29 16:30:54 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-29 16:30:54 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-29 16:30:54 - ai_model - INFO - 执行文本总结，文本长度: 3, 最大总结长度: 300
+2025-09-29 16:30:54 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-29 16:30:54 - ai_model - WARNING - 句子分割失败，使用文本截取代替: cannot access local variable 're' where it is not associated with a value
+2025-09-29 17:17:07 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-29 17:17:07 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-29 17:17:07 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-29 17:17:07 - ai_model - INFO - 执行文本总结，文本长度: 3, 最大总结长度: 300
+2025-09-29 17:17:07 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-29 17:17:07 - ai_model - WARNING - 句子分割失败，使用文本截取代替: cannot access local variable 're' where it is not associated with a value
+2025-09-29 17:20:14 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-29 17:20:14 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-29 17:20:14 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-29 17:20:14 - ai_model - INFO - 执行文本总结，文本长度: 37, 最大总结长度: 300
+2025-09-29 17:20:14 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-29 17:20:14 - ai_model - WARNING - 句子分割失败，使用文本截取代替: cannot access local variable 're' where it is not associated with a value
+2025-09-29 17:23:27 - ai_model - ERROR - Transformers模型初始化失败: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.
+Check your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.
+2025-09-29 17:23:27 - ai_model - WARNING - 无法加载真实模型，正在初始化模拟模型
+2025-09-29 17:23:27 - ai_model - WARNING - transformer 模拟模型已初始化
+2025-09-29 17:23:27 - ai_model - INFO - 执行文本总结，文本长度: 23, 最大总结长度: 300
+2025-09-29 17:23:27 - ai_model - INFO - 使用模拟方法进行文本总结
+2025-09-29 17:23:27 - ai_model - WARNING - 句子分割失败，使用文本截取代替: cannot access local variable 're' where it is not associated with a value

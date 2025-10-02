@@ -308,7 +308,7 @@ def crawl():
         # 提取请求参数
         url = data.get('url')
         depth = data.get('depth', 1)
-        use_ai = data.get('use_ai', False)
+        use_ai = data.get('use_ai', True)  # 默认启用AI功能，特别是为了抖音内容总结
         ai_model_type = data.get('ai_model', 'clip')
         keywords = data.get('keywords', [])
         
@@ -331,10 +331,14 @@ def crawl():
                 'timeout': 30,
                 'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
                 'delay': 1,
-                'use_selenium': False,  # 不使用Selenium以加快速度
+                'use_selenium': True,  # 启用Selenium以支持抖音等需要JavaScript渲染的页面
+                'chrome_headless': True,
                 'follow_links': depth > 0,  # 根据深度决定是否跟随链接
                 'extract_text': True,
                 'extract_images': True,
+                'extract_videos': True,  # 启用视频提取
+                'download_videos': True,  # 启用视频下载
+                'video_dir': './downloaded_videos',  # 视频保存目录
                 'extract_links': True
             }
             

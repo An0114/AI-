@@ -45,15 +45,18 @@ class WebCrawler:
             'timeout': 10,
             'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
             'delay': 1,
-            'use_selenium': False,
+            'use_selenium': True,  # 设为True以支持抖音等需要JavaScript渲染的页面
             'chrome_headless': True,
             'allow_domains': [],  # 允许的域名列表，为空表示不限制
             'deny_domains': [],   # 禁止的域名列表
             'download_images': False,
             'image_dir': './images',
+            'download_videos': True,   # 默认启用视频下载
+            'video_dir': './videos',   # 视频保存目录
             'follow_links': True,
             'extract_text': True,
             'extract_images': True,
+            'extract_videos': True,    # 新增：提取视频
             'extract_links': True,
             'extract_metadata': True,
         }
@@ -70,6 +73,10 @@ class WebCrawler:
         # 创建图片保存目录
         if self.config['download_images']:
             os.makedirs(self.config['image_dir'], exist_ok=True)
+            
+        # 创建视频保存目录
+        if self.config['download_videos']:
+            os.makedirs(self.config['video_dir'], exist_ok=True)
             
     def initialize_selenium(self):
         """初始化Selenium WebDriver"""
@@ -191,8 +198,56 @@ class WebCrawler:
                     return self._fetch_with_requests(url)
                 
                 self.driver.get(url)
-                time.sleep(2)  # 等待页面加载
+                
+                # 针对不同网站设置不同的等待时间
+                wait_time = 2  # 默认等待时间
+                if 'iqiyi.com' in url:
+                    # 爱奇艺页面需要更长时间加载视频资源
+                    wait_time = 12  # 增加等待时间到12秒
+                    # 特别针对爱奇艺的等待策略
+                    print("正在加载爱奇艺页面，等待JavaScript渲染...")
+                    # 等待视频播放器元素加载
+                    time.sleep(4)
+                    # 尝试执行一些JavaScript来触发视频加载
+                    try:
+                        # 滚动到视频区域
+                        self.driver.execute_script("window.scrollTo(0, 500);")
+                        time.sleep(2)
+                        # 执行更多的JavaScript来模拟真实用户行为
+                        self.driver.execute_script("document.documentElement.scrollTop = 300;")
+                        time.sleep(1)
+                        self.driver.execute_script("document.documentElement.scrollTop = 600;")
+                        time.sleep(1)
+                        # 尝试点击视频区域以触发加载
+                        video_elements = self.driver.find_elements_by_css_selector('video, .player-container, .iqp-player, #flashbox')
+                        if video_elements:
+                            try:
+                                self.driver.execute_script("arguments[0].click();", video_elements[0])
+                                print("尝试点击视频区域...")
+                            except:
+                                pass
+                        # 执行更多JavaScript来触发视频数据加载
+                        self.driver.execute_script("console.log('Triggering video load...');")
+                        time.sleep(1)
+                        # 再等待一会儿
+                        time.sleep(4)
+                    except Exception as e:
+                        print(f"执行JavaScript时出错: {str(e)}")
+                elif 'douyin.com' in url or 'tiktok.com' in url:
+                    wait_time = 4  # 抖音页面也需要较长时间
+                
+                time.sleep(wait_time)  # 等待页面加载
+                
+                # 尝试滚动页面以触发视频加载
+                if 'iqiyi.com' in url:
+                    self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                    time.sleep(2)  # 等待滚动后的内容加载
+                    # 再滚动回视频区域
+                    self.driver.execute_script("window.scrollTo(0, 500);")
+                    time.sleep(3)  # 增加等待时间
+                
                 content = self.driver.page_source
+                print(f"成功获取页面内容，长度: {len(content)} 字符")
                 return 200, content, None
                 
             else:
@@ -226,107 +281,329 @@ class WebCrawler:
             return status_code, None, error_msg
     
     def extract_content(self, url, html_content):
-        """从HTML内容中提取信息
+        """从HTML内容中提取视频信息
         
         Args:
             url (str): 页面URL
             html_content (str): HTML内容
             
         Returns:
-            dict: 提取的内容
+            list: 视频列表
         """
-        result = {
-            'url': url,
-            'title': '',
-            'text': '',
-            'images': [],
-            'links': [],
-            'metadata': {},
-            'timestamp': time.time(),
-        }
-        
+        videos = []
         try:
+            # 1. 首先通过video标签提取视频
             soup = BeautifulSoup(html_content, 'html.parser')
+            video_tags = soup.find_all('video')
             
-            # 提取标题
-            if self.config['extract_metadata']:
-                title_tag = soup.find('title')
-                result['title'] = title_tag.text.strip() if title_tag else 'No title'
+            for video in video_tags:
+                video_url = None
+                # 尝试从src属性获取视频URL
+                if video.get('src'):
+                    video_url = video.get('src')
+                # 尝试从data-src属性获取视频URL
+                elif video.get('data-src'):
+                    video_url = video.get('data-src')
+                # 尝试从source标签获取视频URL
+                elif video.find('source'):
+                    source = video.find('source')
+                    video_url = source.get('src') if source.get('src') else None
                 
-                # 提取元数据
-                meta_tags = soup.find_all('meta')
-                metadata = {}
-                for tag in meta_tags:
-                    if tag.get('name'):
-                        metadata[tag.get('name')] = tag.get('content', '')
-                    elif tag.get('property'):
-                        metadata[tag.get('property')] = tag.get('content', '')
-                result['metadata'] = metadata
-                
-            # 提取文本
-            if self.config['extract_text']:
-                # 移除脚本和样式标签
-                for script in soup(['script', 'style', 'noscript', 'iframe']):
-                    script.extract()
-                
-                # 获取纯文本
-                text = soup.get_text(separator='\n', strip=True)
-                # 清理多余的空行
-                text = '\n'.join([line.strip() for line in text.split('\n') if line.strip()])
-                result['text'] = text
-                
-            # 提取图片
-            if self.config['extract_images']:
-                images = []
-                img_tags = soup.find_all('img')
-                for img in img_tags:
-                    img_url = img.get('src')
-                    if img_url:
-                        # 标准化图片URL
-                        img_url = self.normalize_url(img_url, url)
-                        img_alt = img.get('alt', '')
-                        img_title = img.get('title', '')
+                if video_url:
+                    # 标准化URL
+                    if video_url.startswith('//'):
+                        video_url = 'https:' + video_url
+                    elif not video_url.startswith('http'):
+                        # 构建绝对URL
+                        video_url = urljoin(url, video_url)
+                    
+                    if video_url not in [v['url'] for v in videos]:
+                        print(f"通过video标签找到视频: {video_url}")
+                        video_path = None
+                        if self.config['download_videos']:
+                            video_path = self.download_video(video_url)
                         
-                        # 下载图片（如果配置了）
-                        img_path = None
-                        if self.config['download_images']:
-                            img_path = self.download_image(img_url)
-                            
-                        images.append({
-                            'url': img_url,
-                            'alt': img_alt,
-                            'title': img_title,
-                            'path': img_path
+                        videos.append({
+                            'url': video_url,
+                            'type': video.get('type') or 'video/mp4',
+                            'title': video.get('title') or '视频',
+                            'path': video_path
                         })
-                result['images'] = images
-                
-            # 提取链接
-            if self.config['extract_links']:
-                links = []
-                a_tags = soup.find_all('a', href=True)
-                for a in a_tags:
-                    link_url = a.get('href')
-                    if link_url and not link_url.startswith('#'):
-                        # 标准化链接URL
-                        link_url = self.normalize_url(link_url, url)
-                        link_text = a.get_text(strip=True)
-                        link_title = a.get('title', '')
-                        
-                        # 检查链接是否有效
-                        if self.is_valid_url(link_url):
-                            links.append({
-                                'url': link_url,
-                                'text': link_text,
-                                'title': link_title
-                            })
-                result['links'] = links
-                
-        except Exception as e:
-            crawler_logger.error(f"提取内容失败 {url}: {str(e)}")
-            result['error'] = str(e)
             
-        return result
-    
+            # 2. 从script标签中提取视频URL
+            script_tags = soup.find_all('script')
+            
+            for script in script_tags:
+                script_text = script.string
+                if script_text:
+                    # 尝试匹配.mp4文件URL
+                    mp4_pattern = r'https?://[^"\']*\.mp4[^"\']*'
+                    mp4_matches = re.findall(mp4_pattern, script_text)
+                    
+                    for match in mp4_matches:
+                        # 过滤掉错误提示视频
+                        if 'app-error-tip' not in match and match not in [v['url'] for v in videos]:
+                            print(f"从script标签找到MP4视频: {match}")
+                            video_path = None
+                            if self.config['download_videos']:
+                                video_path = self.download_video(match)
+                            
+                            videos.append({
+                                'url': match,
+                                'type': 'video/mp4',
+                                'title': '视频',
+                                'path': video_path
+                            })
+                    
+                    # 尝试匹配其他可能的视频URL格式
+                    video_patterns = [
+                        r'video_url\s*[:=]\s*["\']([^"\']+)',
+                        r'video_path\s*[:=]\s*["\']([^"\']+)',
+                        r'videoLink\s*[:=]\s*["\']([^"\']+)',
+                        # 爱奇艺特定模式 - 增强版本
+                        r'videoId\s*[:=]\s*["\']([^"]+)',
+                        r'playerId\s*[:=]\s*["\']([^"]+)',
+                        r'"url"\s*:\s*["\']([^"\']+\.mp4[^"\']*)',
+                        r'"url"\s*:\s*["\']([^"]+\.mp4[^"]*)',
+                        r'"m3u8"\s*:\s*["\']([^"]+)',
+                        r'"mainUrl"\s*:\s*["\']([^"]+)',
+                        r'"backupUrl"\s*:\s*["\']([^"]+)',
+                        r'"videoUrl"\s*:\s*["\']([^"\']+)',
+                        # 额外的爱奇艺特定模式
+                        r'qiyiPlayerConfig\s*=\s*(\{.*?\});',
+                        r'Q\.Player\s*\(\s*\{.*?tvid\s*:\s*["\']?([^"\'\s,]+)',
+                        r'tvid\s*:\s*["\']?([^"\'\s,]+)',
+                        r'vid\s*:\s*["\']?([^"\'\s,]+)',
+                        r'id\s*=\s*["\']player_([^"\']+)',
+                        r'src\s*=\s*["\']([^"\']+\.mp4)["\']',
+                        r'data-src\s*=\s*["\']([^"\']+\.mp4)["\']',
+                        # 新增的爱奇艺模式
+                        r'"playInfo"\s*:\s*(\{[^\}]+\})',
+                        r'"adaptiveVideos"\s*:\s*\[([^\]]+)\]',
+                        r'"clarity"\s*:\s*\{([^\}]+)\}',
+                        r'"programVideo"\s*:\s*(\{[^\}]+\})',
+                        r'"vrsVideo"\s*:\s*(\{[^\}]+\})',
+                    ]
+                    
+                    for pattern in video_patterns:
+                        matches = re.findall(pattern, script_text)
+                        for match in matches:
+                            # 确保是有效的URL
+                            if isinstance(match, tuple):
+                                match = match[0]  # 取第一个捕获组
+                            
+                            if match.startswith('//'):
+                                match = 'https:' + match
+                            elif not match.startswith('http'):
+                                # 对于爱奇艺的特殊ID，我们可以尝试构建API URL
+                                if 'iqiyi.com' in url and len(match) > 5 and '.' not in match:
+                                    # 尝试使用已知的爱奇艺视频API构建URL
+                                    api_url = f"https://cache.video.iqiyi.com/dash?vid={match}&ran=0.12345&qyid=0123456789&v=0"
+                                    match = api_url
+                                else:
+                                    continue
+                            
+                            if match not in [v['url'] for v in videos]:
+                                video_path = None
+                                if self.config['download_videos']:
+                                    video_path = self.download_video(match)
+                                
+                                videos.append({
+                                    'url': match,
+                                    'type': 'video/mp4',
+                                    'title': '视频',
+                                    'path': video_path
+                                })
+            
+            # 3. 特别针对爱奇艺页面的额外处理
+            if 'iqiyi.com' in url:
+                # 提取视频ID并尝试直接构建API请求
+                video_ids = set()  # 使用集合去重
+                
+                # 尝试从script标签中提取多种可能的视频ID
+                id_patterns = [
+                    r'videoId\s*[:=]\s*["\']([^"]+)',
+                    r'tvid\s*[:=]\s*["\']([^"]+)',
+                    r'vid\s*[:=]\s*["\']([^"]+)',
+                    r'vId\s*[:=]\s*["\']([^"]+)',
+                    r'Q\.Player\s*\(\s*\{.*?tvid\s*:\s*["\']?([^"\'\s,]+)',
+                    r'qiyiPlayerConfig\.tvid\s*=\s*["\']([^"]+)',
+                    r'qiyiPlayerConfig\.vid\s*=\s*["\']([^"]+)',
+                    # 新增的ID提取模式
+                    r'"tvid"\s*:\s*["\']([^"\']+)',
+                    r'"vid"\s*:\s*["\']([^"\']+)',
+                    r'\btvid=([^&]+)',
+                    r'\bvid=([^&]+)',
+                    r'_tvid=([^&]+)',
+                    r'_vid=([^&]+)',
+                ]
+                
+                for pattern in id_patterns:
+                    found_ids = re.findall(pattern, html_content)
+                    for vid in found_ids:
+                        if vid and vid.strip():
+                            video_ids.add(vid.strip())
+                
+                # 尝试从URL中提取视频ID
+                url_id_patterns = [
+                    r'v_(\w+)\.html',
+                    r'tvid=(\w+)',
+                    r'vid=(\w+)',
+                    r'/videos/(\w+)',
+                    r'/v_(\w+)/',
+                    r'play/(\w+)',
+                ]
+                
+                for pattern in url_id_patterns:
+                    url_match = re.search(pattern, url)
+                    if url_match:
+                        vid = url_match.group(1)
+                        if vid and vid.strip():
+                            video_ids.add(vid.strip())
+                
+                print(f"从页面提取到的视频ID: {video_ids}")
+                
+                # 使用提取的视频ID构建API请求
+                for video_id in video_ids:
+                    # 尝试不同的爱奇艺API端点
+                    api_endpoints = [
+                        f"https://cache.video.iqiyi.com/dash?vid={video_id}&ran=0.12345&qyid=0123456789&v=0",
+                        f"https://player.video.iqiyi.com/apis/getSource?sources=3&tvid={video_id}",
+                        f"https://mixer.video.iqiyi.com/jp/mixin/videos/{video_id}",
+                        f"https://cors-anywhere.herokuapp.com/https://cache.video.iqiyi.com/dash?vid={video_id}&ran=0.12345&qyid=0123456789&v=0",  # 备用CORS代理
+                        f"https://api.iqiyi.com/video/v1/video/videoInfo?aid=qc_100001_100102&tvid={video_id}",
+                        f"https://pcw-api.iqiyi.com/albums/album/avlistinfo?aid={video_id}&page=1&size=50",
+                        f"https://meta.video.iqiyi.com/videos/{video_id}",
+                    ]
+                    
+                    # 增强的请求头，更像真实浏览器
+                    enhanced_headers = {
+                        'User-Agent': self.config['user_agent'],
+                        'Referer': url,
+                        'Origin': 'https://www.iqiyi.com',
+                        'Accept': '*/*',
+                        'Accept-Language': 'zh-CN,zh;q=0.9',
+                        'Connection': 'keep-alive',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        # 新增请求头
+                        'Accept-Encoding': 'gzip, deflate, br',
+                        'Cache-Control': 'no-cache',
+                        'Pragma': 'no-cache',
+                        'TE': 'Trailers',
+                    }
+                    
+                    for endpoint in api_endpoints:
+                        if endpoint not in [v['url'] for v in videos]:
+                            try:
+                                print(f"尝试访问爱奇艺API: {endpoint}")
+                                # 尝试直接访问API获取视频源
+                                # 使用更长的超时时间
+                                
+                                # 配置代理（可选）
+                                proxies = None
+                                # 如果需要使用代理，可以取消下面的注释
+                                # proxies = {'http': 'http://127.0.0.1:7890', 'https': 'http://127.0.0.1:7890'}
+                                
+                                api_response = requests.get(
+                                    endpoint,
+                                    headers=enhanced_headers,
+                                    timeout=15,  # 增加超时时间
+                                    allow_redirects=True,
+                                    proxies=proxies  # 使用代理
+                                )
+                                
+                                # 检查响应状态
+                                if api_response.status_code != 200:
+                                    print(f"API请求失败，状态码: {api_response.status_code}")
+                                    print(f"响应头: {api_response.headers}")
+                                    print(f"响应内容前200字符: {api_response.text[:200]}...")
+                                    continue
+                                
+                                # 尝试解析响应
+                                try:
+                                    api_data = api_response.json()
+                                    print(f"成功解析API响应，包含{len(str(api_data))}个字符")
+                                    print(f"响应结构: {list(api_data.keys())[:5]}...")  # 打印前5个键
+                                    
+                                    # 递归搜索字典中的URL
+                                    def find_urls(data, url_list):
+                                        if isinstance(data, dict):
+                                            for key, value in data.items():
+                                                # 检查各种可能包含视频URL的字段
+                                                url_keys = ['url', 'm3u8', 'mainUrl', 'backupUrl', 'videoUrl', 'mp4', 'src']
+                                                if key.lower() in url_keys and isinstance(value, str):
+                                                    if any(ext in value.lower() for ext in ['.mp4', '.m3u8', '.ts', '.flv']):
+                                                        url_list.append(value)
+                                                # 检查嵌套结构
+                                                elif isinstance(value, (dict, list)):
+                                                    find_urls(value, url_list)
+                                        elif isinstance(data, list):
+                                            for item in data:
+                                                find_urls(item, url_list)
+                                    
+                                    api_urls = []
+                                    find_urls(api_data, api_urls)
+                                    
+                                    print(f"从API响应中提取到{len(api_urls)}个视频URL")
+                                    
+                                    for api_url in api_urls:
+                                        # 过滤掉错误提示视频
+                                        if 'app-error-tip' not in api_url and api_url not in [v['url'] for v in videos]:
+                                            # 标准化URL
+                                            if api_url.startswith('//'):
+                                                api_url = 'https:' + api_url
+                                            
+                                            print(f"找到有效视频URL: {api_url}")
+                                            video_path = None
+                                            if self.config['download_videos']:
+                                                video_path = self.download_video(api_url)
+                                            
+                                            videos.append({
+                                                'url': api_url,
+                                                'type': 'video/mp4' if '.mp4' in api_url else 'video/m3u8',
+                                                'title': f'爱奇艺视频_{video_id}',
+                                                'path': video_path
+                                            })
+                                except json.JSONDecodeError:
+                                    # 如果不是JSON，尝试直接从响应文本中提取URL
+                                    print("响应不是有效JSON，尝试直接提取URL")
+                                    url_patterns = [
+                                        r'https?://[^"\']*\.mp4[^"\']*',
+                                        r'https?://[^"\']*\.m3u8[^"\']*',
+                                        r'https?://[^"\']*\.ts[^"\']*'
+                                    ]
+                                    
+                                    for pattern in url_patterns:
+                                        matches = re.findall(pattern, api_response.text)
+                                        for match in matches:
+                                            if 'app-error-tip' not in match and match not in [v['url'] for v in videos]:
+                                                print(f"从非JSON响应中提取到URL: {match}")
+                                                video_path = None
+                                                if self.config['download_videos']:
+                                                    video_path = self.download_video(match)
+                                                
+                                                videos.append({
+                                                    'url': match,
+                                                    'type': 'video/mp4' if '.mp4' in match else 'video/m3u8',
+                                                    'title': f'爱奇艺视频_{video_id}',
+                                                    'path': video_path
+                                                })
+                            except Exception as e:
+                                print(f"尝试访问爱奇艺API失败: {str(e)}")
+                                # 即使API访问失败，也添加API端点作为可能的视频源
+                                if endpoint not in [v['url'] for v in videos]:
+                                    videos.append({
+                                        'url': endpoint,
+                                        'type': 'api_endpoint',
+                                        'title': f'爱奇艺API端点_{video_id}',
+                                        'path': None
+                                    })
+        except Exception as e:
+            print(f"提取视频失败: {str(e)}")
+            crawler_logger.error(f"提取视频失败 {url}: {str(e)}")
+        
+        return videos
+
     def download_image(self, img_url):
         """下载图片
         
@@ -369,7 +646,126 @@ class WebCrawler:
         except Exception as e:
             crawler_logger.error(f"下载图片失败 {img_url}: {str(e)}")
             return None
-    
+            
+    def download_video(self, video_url):
+        """下载视频
+        
+        Args:
+            video_url (str): 视频URL
+            
+        Returns:
+            str: 保存的视频路径，或None（如果下载失败）
+        """
+        try:
+            # 创建视频文件名（使用URL的哈希值）
+            video_hash = hashlib.md5(video_url.encode()).hexdigest()
+            # 获取文件扩展名
+            parsed_url = urlparse(video_url)
+            path = parsed_url.path
+            ext = os.path.splitext(path)[1] if '.' in path else '.mp4'
+            # 限制扩展名长度
+            if len(ext) > 5:
+                ext = '.mp4'
+            
+            # 特殊处理m3u8格式
+            if '.m3u8' in video_url:
+                ext = '.mp4'  # 最终保存为mp4格式
+                print(f"检测到m3u8格式视频，将尝试下载并转换: {video_url}")
+                
+                # 简单的m3u8下载实现（需要更复杂的实现可以使用ffmpeg）
+                try:
+                    # 构建保存路径
+                    video_filename = f"{video_hash}{ext}"
+                    video_path = os.path.join(self.config['video_dir'], video_filename)
+                    
+                    # 如果文件已存在，直接返回路径
+                    if os.path.exists(video_path):
+                        return video_path
+                    
+                    # 下载m3u8文件
+                    headers = {'User-Agent': self.config['user_agent']}
+                    m3u8_response = requests.get(video_url, headers=headers, timeout=self.config['timeout'])
+                    m3u8_response.raise_for_status()
+                    
+                    # 解析m3u8文件中的ts片段
+                    ts_urls = []
+                    for line in m3u8_response.text.split('\n'):
+                        if line and not line.startswith('#'):
+                            # 构建完整的ts文件URL
+                            ts_url = line if line.startswith('http') else urljoin(video_url, line)
+                            ts_urls.append(ts_url)
+                    
+                    print(f"找到{len(ts_urls)}个ts片段")
+                    
+                    # 如果找到了ts片段，尝试下载
+                    if ts_urls:
+                        with open(video_path, 'wb') as f:
+                            for i, ts_url in enumerate(ts_urls):
+                                try:
+                                    print(f"下载ts片段 {i+1}/{len(ts_urls)}: {ts_url}")
+                                    ts_response = requests.get(ts_url, headers=headers, timeout=self.config['timeout'], stream=True)
+                                    ts_response.raise_for_status()
+                                    for chunk in ts_response.iter_content(chunk_size=8192):
+                                        if chunk:
+                                            f.write(chunk)
+                                except Exception as e:
+                                    print(f"下载ts片段失败 {i+1}: {str(e)}")
+                                    # 继续尝试下载其他片段
+                                    continue
+                        
+                        print(f"m3u8视频下载完成: {video_path}")
+                        return video_path
+                    else:
+                        print("未找到ts片段，使用普通下载方式")
+                except Exception as e:
+                    print(f"m3u8下载失败，尝试普通下载方式: {str(e)}")
+                    # 继续使用普通下载方式
+            
+            # 普通视频下载
+            # 构建保存路径
+            video_filename = f"{video_hash}{ext}"
+            video_path = os.path.join(self.config['video_dir'], video_filename)
+            
+            # 如果文件已存在，直接返回路径
+            if os.path.exists(video_path):
+                return video_path
+            
+            # 下载视频
+            headers = {
+                'User-Agent': self.config['user_agent'],
+                'Referer': 'https://www.iqiyi.com/',  # 为爱奇艺视频设置特定的Referer
+                'Accept': 'video/webm,video/ogg,video/*;q=0.9,application/ogg;q=0.7,audio/*;q=0.6,*/*;q=0.5',
+                'Range': 'bytes=0-'  # 请求从文件开头下载
+            }
+            
+            # 大文件下载，使用stream模式
+            response = requests.get(video_url, headers=headers, timeout=self.config['timeout'], stream=True)
+            response.raise_for_status()
+            
+            # 获取文件大小（如果可用）
+            file_size = int(response.headers.get('content-length', 0))
+            print(f"开始下载视频，URL: {video_url}, 预计大小: {file_size/1024/1024:.2f} MB")
+            
+            # 保存视频
+            downloaded_size = 0
+            with open(video_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+                        downloaded_size += len(chunk)
+                        # 打印下载进度
+                        if file_size > 0:
+                            progress = (downloaded_size / file_size) * 100
+                            print(f"下载进度: {progress:.1f}% ({downloaded_size/1024/1024:.2f} MB/{file_size/1024/1024:.2f} MB)", end='\r')
+            
+            print(f"\n视频下载完成: {video_path}, 实际大小: {downloaded_size/1024/1024:.2f} MB")
+            return video_path
+            
+        except Exception as e:
+            print(f"下载视频失败 {video_url}: {str(e)}")
+            crawler_logger.error(f"下载视频失败 {video_url}: {str(e)}")
+            return None
+
     def filter_with_ai(self, content, ai_model, keywords=None):
         """使用AI模型过滤内容
         
@@ -486,9 +882,27 @@ class WebCrawler:
                     # 提取页面内容
                     page_content = self.extract_content(current_url, html_content)
                     
-                    # 如果启用了AI过滤，进行AI分析
-                    if use_ai:
+                    # 如果启用了AI功能，进行AI分析和内容总结
+                    if use_ai and ai_model:
+                        # 进行AI过滤
                         page_content = self.filter_with_ai(page_content, ai_model, keywords)
+                        
+                        # 自动进行内容总结
+                        try:
+                            # 获取页面文本内容
+                            content_text = page_content.get('text', '')
+                            if content_text:
+                                # 调用AI模型进行文本总结
+                                summary_result = ai_model.summarize_text(
+                                    text=content_text,
+                                    max_length=300,
+                                    url=current_url  # 传递URL以便AI模型识别抖音等特殊内容
+                                )
+                                # 将总结结果添加到页面内容中
+                                page_content['summary'] = summary_result
+                        except Exception as e:
+                            crawler_logger.error(f"内容总结失败: {str(e)}")
+                            page_content['summary'] = {'status': 'error', 'error': str(e)}
                         
                     # 添加到结果列表
                     self.results.append(page_content)

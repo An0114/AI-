@@ -274,3 +274,41 @@
 2025-09-26 17:34:38,510 - server - INFO - 成功导入WebCrawler
 2025-09-26 17:34:38,512 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
 2025-09-26 17:34:38,512 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-29 15:52:40,777 - server - INFO - 成功导入AIModel
+2025-09-29 15:52:41,425 - server - INFO - 成功导入WebCrawler
+2025-09-29 15:52:41,428 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-29 15:52:41,428 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-29 15:52:49,597 - server - INFO - 开始爬取网站: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&vid=7554051922844585226, 深度: 1, 使用AI: False
+2025-09-29 15:52:49,597 - server - INFO - 开始真实爬取: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&vid=7554051922844585226
+2025-09-29 16:14:18,511 - server - INFO - 成功导入AIModel
+2025-09-29 16:14:19,052 - server - INFO - 成功导入WebCrawler
+2025-09-29 16:14:19,054 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-29 16:14:19,055 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-29 16:14:26,878 - server - INFO - 开始爬取网站: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&vid=7554051922844585226, 深度: 1, 使用AI: False
+2025-09-29 16:14:26,878 - server - INFO - 开始真实爬取: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&vid=7554051922844585226
+2025-09-29 16:15:15,226 - server - INFO - 开始爬取网站: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&modal_id=7383733779011030312&vid=7554051922844585226, 深度: 1, 使用AI: False
+2025-09-29 16:15:15,226 - server - INFO - 开始真实爬取: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&modal_id=7383733779011030312&vid=7554051922844585226
+2025-09-29 16:16:12,244 - server - INFO - 成功导入AIModel
+2025-09-29 16:16:12,840 - server - INFO - 成功导入WebCrawler
+2025-09-29 16:16:12,843 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-29 16:16:12,844 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-29 16:16:14,977 - server - INFO - 开始爬取网站: https://geek-docs.com/python/python-ask-answer/148_python_pyinstaller_is_not_recognized_as_internal_or_external_command.html, 深度: 1, 使用AI: False
+2025-09-29 16:16:14,977 - server - INFO - 开始真实爬取: https://geek-docs.com/python/python-ask-answer/148_python_pyinstaller_is_not_recognized_as_internal_or_external_command.html
+2025-09-29 16:20:09,903 - server - INFO - 开始爬取网站: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5, 深度: 1, 使用AI: False
+2025-09-29 16:20:09,903 - server - INFO - 开始真实爬取: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5
+2025-09-29 16:29:49,800 - server - INFO - 成功导入AIModel
+2025-09-29 16:29:50,613 - server - INFO - 成功导入WebCrawler
+2025-09-29 16:29:50,618 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-29 16:29:50,618 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-29 16:29:56,443 - server - INFO - 开始爬取网站: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5, 深度: 1, 使用AI: False
+2025-09-29 16:29:56,443 - server - INFO - 开始真实爬取: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5
+2025-09-29 17:15:24,827 - server - INFO - 成功导入AIModel
+2025-09-29 17:15:25,433 - server - INFO - 成功导入WebCrawler
+2025-09-29 17:15:25,436 - server - INFO - 检测到在multiprocessing环境中运行，自动调整配置
+2025-09-29 17:15:25,436 - server - INFO - 启动服务器，监听地址: 127.0.0.1:5000, 调试模式: True, 自动重载: False
+2025-09-29 17:15:31,030 - server - INFO - 开始爬取网站: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5, 深度: 1, 使用AI: False
+2025-09-29 17:15:31,034 - server - INFO - 开始真实爬取: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5
+2025-09-29 17:18:51,961 - server - INFO - 开始爬取网站: https://www.iqiyi.com/, 深度: 1, 使用AI: False
+2025-09-29 17:18:51,963 - server - INFO - 开始真实爬取: https://www.iqiyi.com/
+2025-09-29 17:21:38,739 - server - INFO - 开始爬取网站: https://www.iqiyi.com/v_1bvh643tbmk.html?ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&eventId=66f24da8f092160fa6903f0ebbd83506&bstp=3&r_originl=32031634412&stype=2&r_ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&rseat=small_image2&ht=2&c1=2&r_source=1792@1529@1630&recArea=new_focus&vfrmrst=small_image2&bucket=11088_B&vfrmblk=pca_recommend_focus&reasonid=0&rank=2&block=pca_recommend_focus&rpage=pcw_home&position=1&vfrm=pcw_home, 深度: 1, 使用AI: False
+2025-09-29 17:21:38,743 - server - INFO - 开始真实爬取: https://www.iqiyi.com/v_1bvh643tbmk.html?ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&eventId=66f24da8f092160fa6903f0ebbd83506&bstp=3&r_originl=32031634412&stype=2&r_ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&rseat=small_image2&ht=2&c1=2&r_source=1792@1529@1630&recArea=new_focus&vfrmrst=small_image2&bucket=11088_B&vfrmblk=pca_recommend_focus&reasonid=0&rank=2&block=pca_recommend_focus&rpage=pcw_home&position=1&vfrm=pcw_home

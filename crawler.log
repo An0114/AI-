@@ -485,3 +485,162 @@
 2025-09-26 17:34:50 - web_crawler - INFO - 爬取: https://www.douban.com/podcast (深度: 1/1)
 2025-09-26 17:34:51 - web_crawler - INFO - 爬取完成: 10 页面，成功: 8，失败: 2
 2025-09-26 17:34:51 - web_crawler - INFO - 耗时: 13.88 秒
+2025-09-29 15:52:49 - web_crawler - INFO - 爬取: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&vid=7554051922844585226 (深度: 0/1)
+2025-09-29 15:52:51 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 15:52:51 - web_crawler - INFO - 耗时: 1.89 秒
+2025-09-29 16:14:26 - web_crawler - INFO - 爬取: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&vid=7554051922844585226 (深度: 0/1)
+2025-09-29 16:14:28 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 16:14:28 - web_crawler - INFO - 耗时: 1.20 秒
+2025-09-29 16:15:15 - web_crawler - INFO - 爬取: https://www.douyin.com/user/MS4wLjABAAAAOpfPo6TZ7HnxC_IicYin6cTEVij1hl0qgffb3VI14geVfLhhoWPeo6F4yIF7Fg0Q?from_tab_name=main&modal_id=7383733779011030312&vid=7554051922844585226 (深度: 0/1)
+2025-09-29 16:15:16 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 16:15:16 - web_crawler - INFO - 耗时: 1.20 秒
+2025-09-29 16:16:14 - web_crawler - INFO - 爬取: https://geek-docs.com/python/python-ask-answer/148_python_pyinstaller_is_not_recognized_as_internal_or_external_command.html (深度: 0/1)
+2025-09-29 16:16:16 - web_crawler - INFO - 爬取: https://geek-docs.com (深度: 1/1)
+2025-09-29 16:16:17 - web_crawler - INFO - 爬取: https://geek-docs.com/cprogramming (深度: 1/1)
+2025-09-29 16:16:19 - web_crawler - INFO - 爬取: https://geek-docs.com/cpp (深度: 1/1)
+2025-09-29 16:16:21 - web_crawler - INFO - 爬取: https://geek-docs.com/cpp-multi-thread (深度: 1/1)
+2025-09-29 16:16:22 - web_crawler - INFO - 爬取: https://geek-docs.com/shell (深度: 1/1)
+2025-09-29 16:16:24 - web_crawler - INFO - 爬取: https://geek-docs.com/perl (深度: 1/1)
+2025-09-29 16:16:26 - web_crawler - INFO - 爬取: https://geek-docs.com/leetcode (深度: 1/1)
+2025-09-29 16:16:27 - web_crawler - INFO - 爬取: https://geek-docs.com/csharp (深度: 1/1)
+2025-09-29 16:16:29 - web_crawler - INFO - 爬取: https://geek-docs.com/html (深度: 1/1)
+2025-09-29 16:16:31 - web_crawler - INFO - 爬取完成: 10 页面，成功: 10，失败: 0
+2025-09-29 16:16:31 - web_crawler - INFO - 耗时: 16.06 秒
+2025-09-29 16:20:09 - web_crawler - INFO - 爬取: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5 (深度: 0/1)
+2025-09-29 16:20:11 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 16:20:11 - web_crawler - INFO - 耗时: 1.88 秒
+2025-09-29 16:30:13 - web_crawler - ERROR - Selenium WebDriver初始化失败: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x0077A813+48355]
+	(No symbol) [0x0070C4B1]
+	(No symbol) [0x00615358]
+	(No symbol) [0x00631A9E]
+	(No symbol) [0x00630579]
+	(No symbol) [0x00660C55]
+	(No symbol) [0x0066093C]
+	(No symbol) [0x0065A536]
+	(No symbol) [0x006382DC]
+	(No symbol) [0x006393DD]
+	GetHandleVerifier [0x009DAABD+2539405]
+	GetHandleVerifier [0x00A1A78F+2800735]
+	GetHandleVerifier [0x00A1456C+2775612]
+	GetHandleVerifier [0x008051E0+616112]
+	(No symbol) [0x00715F8C]
+	(No symbol) [0x00712328]
+	(No symbol) [0x0071240B]
+	(No symbol) [0x00704FF7]
+	BaseThreadInitThunk [0x75885D49+25]
+	RtlInitializeExceptionChain [0x772DD6DB+107]
+	RtlGetAppContainerNamedObjectPath [0x772DD661+561]
+
+2025-09-29 16:30:13 - web_crawler - INFO - 爬取: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5 (深度: 0/1)
+2025-09-29 16:30:15 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 16:30:15 - web_crawler - INFO - 耗时: 19.39 秒
+2025-09-29 16:48:18 - web_crawler - ERROR - Selenium WebDriver初始化失败: Could not reach host. Are you offline?
+2025-09-29 16:48:18 - web_crawler - INFO - 爬取: https://www.bilibili.com/video/BV1aG4y1t7fV (深度: 0/0)
+2025-09-29 16:48:20 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 16:48:20 - web_crawler - INFO - 耗时: 24.52 秒
+2025-09-29 17:16:18 - web_crawler - ERROR - Selenium WebDriver初始化失败: Could not reach host. Are you offline?
+2025-09-29 17:16:18 - web_crawler - INFO - 爬取: https://www.msn.cn/zh-cn/video?ocid=msedgdhphdr&cvid=57b7b59786354be888bef586fd38c1e5 (深度: 0/1)
+2025-09-29 17:16:24 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 17:16:24 - web_crawler - INFO - 耗时: 53.29 秒
+2025-09-29 17:19:37 - web_crawler - ERROR - Selenium WebDriver初始化失败: Could not reach host. Are you offline?
+2025-09-29 17:19:38 - web_crawler - INFO - 爬取: https://www.iqiyi.com/ (深度: 0/1)
+2025-09-29 17:19:42 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 17:19:42 - web_crawler - INFO - 耗时: 50.25 秒
+2025-09-29 17:22:24 - web_crawler - ERROR - Selenium WebDriver初始化失败: Could not reach host. Are you offline?
+2025-09-29 17:22:24 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_1bvh643tbmk.html?ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&eventId=66f24da8f092160fa6903f0ebbd83506&bstp=3&r_originl=32031634412&stype=2&r_ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&rseat=small_image2&ht=2&c1=2&r_source=1792@1529@1630&recArea=new_focus&vfrmrst=small_image2&bucket=11088_B&vfrmblk=pca_recommend_focus&reasonid=0&rank=2&block=pca_recommend_focus&rpage=pcw_home&position=1&vfrm=pcw_home (深度: 0/1)
+2025-09-29 17:22:27 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 17:22:27 - web_crawler - INFO - 耗时: 48.52 秒
+2025-09-29 17:43:56 - web_crawler - ERROR - Selenium WebDriver初始化失败: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x00D8A813+48355]
+	(No symbol) [0x00D1C4B1]
+	(No symbol) [0x00C25358]
+	(No symbol) [0x00C41A9E]
+	(No symbol) [0x00C40579]
+	(No symbol) [0x00C70C55]
+	(No symbol) [0x00C7093C]
+	(No symbol) [0x00C6A536]
+	(No symbol) [0x00C482DC]
+	(No symbol) [0x00C493DD]
+	GetHandleVerifier [0x00FEAABD+2539405]
+	GetHandleVerifier [0x0102A78F+2800735]
+	GetHandleVerifier [0x0102456C+2775612]
+	GetHandleVerifier [0x00E151E0+616112]
+	(No symbol) [0x00D25F8C]
+	(No symbol) [0x00D22328]
+	(No symbol) [0x00D2240B]
+	(No symbol) [0x00D14FF7]
+	BaseThreadInitThunk [0x75885D49+25]
+	RtlInitializeExceptionChain [0x772DD6DB+107]
+	RtlGetAppContainerNamedObjectPath [0x772DD661+561]
+
+2025-09-29 17:43:56 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_1bvh643tbmk.html?ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&eventId=66f24da8f092160fa6903f0ebbd83506&bstp=3&r_originl=32031634412&stype=2&r_ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&rseat=small_image2&ht=2&c1=2&r_source=1792@1529@1630&recArea=new_focus&vfrmrst=small_image2&bucket=11088_B&vfrmblk=pca_recommend_focus&reasonid=0&rank=2&block=pca_recommend_focus&rpage=pcw_home&position=1&vfrm=pcw_home (深度: 0/0)
+2025-09-29 17:44:01 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 17:44:01 - web_crawler - INFO - 耗时: 223.90 秒
+2025-09-29 17:50:25 - web_crawler - ERROR - Selenium WebDriver初始化失败: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x005BA813+48355]
+	(No symbol) [0x0054C4B1]
+	(No symbol) [0x00455358]
+	(No symbol) [0x00471A9E]
+	(No symbol) [0x00470579]
+	(No symbol) [0x004A0C55]
+	(No symbol) [0x004A093C]
+	(No symbol) [0x0049A536]
+	(No symbol) [0x004782DC]
+	(No symbol) [0x004793DD]
+	GetHandleVerifier [0x0081AABD+2539405]
+	GetHandleVerifier [0x0085A78F+2800735]
+	GetHandleVerifier [0x0085456C+2775612]
+	GetHandleVerifier [0x006451E0+616112]
+	(No symbol) [0x00555F8C]
+	(No symbol) [0x00552328]
+	(No symbol) [0x0055240B]
+	(No symbol) [0x00544FF7]
+	BaseThreadInitThunk [0x75885D49+25]
+	RtlInitializeExceptionChain [0x772DD6DB+107]
+	RtlGetAppContainerNamedObjectPath [0x772DD661+561]
+
+2025-09-29 17:50:25 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_1bvh643tbmk.html?ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&eventId=66f24da8f092160fa6903f0ebbd83506&bstp=3&r_originl=32031634412&stype=2&r_ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&rseat=small_image2&ht=2&c1=2&r_source=1792@1529@1630&recArea=new_focus&vfrmrst=small_image2&bucket=11088_B&vfrmblk=pca_recommend_focus&reasonid=0&rank=2&block=pca_recommend_focus&rpage=pcw_home&position=1&vfrm=pcw_home (深度: 0/0)
+2025-09-29 17:50:28 - web_crawler - ERROR - 提取内容失败 https://www.iqiyi.com/v_1bvh643tbmk.html?ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&eventId=66f24da8f092160fa6903f0ebbd83506&bstp=3&r_originl=32031634412&stype=2&r_ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&rseat=small_image2&ht=2&c1=2&r_source=1792@1529@1630&recArea=new_focus&vfrmrst=small_image2&bucket=11088_B&vfrmblk=pca_recommend_focus&reasonid=0&rank=2&block=pca_recommend_focus&rpage=pcw_home&position=1&vfrm=pcw_home: 'str' object has no attribute 'contains'
+2025-09-29 17:50:30 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 17:50:30 - web_crawler - INFO - 耗时: 215.03 秒
+2025-09-29 17:51:53 - web_crawler - ERROR - Selenium WebDriver初始化失败: Could not reach host. Are you offline?
+2025-09-29 17:51:53 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_1bvh643tbmk.html?ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&eventId=66f24da8f092160fa6903f0ebbd83506&bstp=3&r_originl=32031634412&stype=2&r_ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&rseat=small_image2&ht=2&c1=2&r_source=1792@1529@1630&recArea=new_focus&vfrmrst=small_image2&bucket=11088_B&vfrmblk=pca_recommend_focus&reasonid=0&rank=2&block=pca_recommend_focus&rpage=pcw_home&position=1&vfrm=pcw_home (深度: 0/0)
+2025-09-29 17:52:40 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 17:52:40 - web_crawler - INFO - 耗时: 73.49 秒
+2025-09-29 17:55:34 - web_crawler - ERROR - Selenium WebDriver初始化失败: Could not reach host. Are you offline?
+2025-09-29 17:55:34 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_1bvh643tbmk.html?ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&eventId=66f24da8f092160fa6903f0ebbd83506&bstp=3&r_originl=32031634412&stype=2&r_ext=w:0.16846348345279694,score:0.16846348345279694,c_type:0&rseat=small_image2&ht=2&c1=2&r_source=1792@1529@1630&recArea=new_focus&vfrmrst=small_image2&bucket=11088_B&vfrmblk=pca_recommend_focus&reasonid=0&rank=2&block=pca_recommend_focus&rpage=pcw_home&position=1&vfrm=pcw_home (深度: 0/0)
+2025-09-29 17:55:39 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 17:55:39 - web_crawler - INFO - 耗时: 28.55 秒
+2025-09-29 18:00:48 - web_crawler - ERROR - Selenium WebDriver初始化失败: Could not reach host. Are you offline?
+2025-09-29 18:00:48 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_19rqyblj1o.html (深度: 0/0)
+2025-09-29 18:01:03 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 18:01:03 - web_crawler - INFO - 耗时: 38.81 秒
+2025-09-29 18:01:08 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_19rqyh7vnc.html (深度: 0/0)
+2025-09-29 18:01:22 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 18:01:22 - web_crawler - INFO - 耗时: 14.06 秒
+2025-09-29 18:01:27 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_19rqw2z45c.html (深度: 0/0)
+2025-09-29 18:01:40 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 18:01:40 - web_crawler - INFO - 耗时: 13.17 秒
+2025-09-29 18:01:45 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_19rqysh5g0.html (深度: 0/0)
+2025-09-29 18:01:59 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 18:01:59 - web_crawler - INFO - 耗时: 13.30 秒
+2025-09-29 18:12:43 - web_crawler - ERROR - Selenium WebDriver初始化失败: Could not reach host. Are you offline?
+2025-09-29 18:12:43 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_19rrh5x2bg.html (深度: 0/0)
+2025-09-29 18:13:22 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 18:13:22 - web_crawler - INFO - 耗时: 83.10 秒
+2025-09-29 18:13:27 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_19rx5g02k4.html (深度: 0/0)
+2025-09-29 18:14:04 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 18:14:04 - web_crawler - INFO - 耗时: 36.87 秒
+2025-09-29 18:14:09 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_19rr0vnm4c.html (深度: 0/0)
+2025-09-29 18:14:46 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 18:14:46 - web_crawler - INFO - 耗时: 36.75 秒
+2025-09-29 18:14:51 - web_crawler - INFO - 爬取: https://www.iqiyi.com/v_19rqz0w4l0.html (深度: 0/0)
+2025-09-29 18:15:27 - web_crawler - INFO - 爬取完成: 1 页面，成功: 1，失败: 0
+2025-09-29 18:15:27 - web_crawler - INFO - 耗时: 36.76 秒
